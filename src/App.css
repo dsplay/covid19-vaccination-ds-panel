@@ -1,0 +1,16 @@
+.App {
+  height: 100vh;
+  width: 100%;
+  margin: 0; padding: 0;
+}
+
+.graph-wrapper {
+  width: 80%;
+  height: 75%;
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
