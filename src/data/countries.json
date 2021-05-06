@@ -1,0 +1,37 @@
+{
+  "US": {
+    "flag": "🇺🇸",
+    "code": "USA",
+    "population": 331002651
+  },
+  "Germany": {
+    "flag": "🇩🇪",
+    "code": "DEU",
+    "population": 83783942
+  },
+  "Cameroon": {
+    "flag": "🇨🇲",
+    "code": "CMR",
+    "population": 26545864	
+  },
+  "China": {
+    "flag": "🇨🇳",
+    "code": "CHN",
+    "population": 1439323776
+  },
+  "India": {
+    "flag": "🇮🇳",
+    "code": "IND",
+    "population": 1380004385
+  },
+  "Russia": {
+    "flag": "🇷🇺",
+    "code": "RUS",
+    "population": 145934462
+  },
+  "Brazil": {
+    "flag": "🇧🇷",
+    "code": "BRA",
+    "population": 211755692
+  }
+}

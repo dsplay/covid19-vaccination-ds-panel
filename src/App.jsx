@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import Graph from './components/Graph/Graph';
 import CardList from './components/CardList/CardList';
 
+import downloadCSV from './utils/find';
+
 const labels = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 const GraphDataMock = {
@@ -22,6 +24,10 @@ const GraphDataMock = {
 };
 
 function App() {
+  downloadCSV(['Brazil']).then((countries) => {
+    console.log(countries);
+  });
+
   return (
     <div className="App">
       <Header />
