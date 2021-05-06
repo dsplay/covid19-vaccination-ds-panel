@@ -18,5 +18,7 @@
         "react",
         "react-hooks"
     ],
-    "rules": {}
+    "rules": {
+      "no-param-reassign": "warn"
+    }
 }
