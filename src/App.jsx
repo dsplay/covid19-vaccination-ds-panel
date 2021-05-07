@@ -1,11 +1,14 @@
-import React from 'react';
+/* eslint-disable class-methods-use-this */
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
+import { useLocation } from 'react-router-dom';
+import * as queryString from 'query-string';
 import Header from './components/Header/Header';
 import Graph from './components/Graph/Graph';
 import CardList from './components/CardList/CardList';
 
-import downloadCSV from './utils/find';
+import getInfoCountries from './utils/getInfoCountries';
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -23,10 +26,30 @@ const GraphDataMock = {
   ],
 };
 
+function getQuery(location) {
+  const query = queryString.parse(location.search);
+
+  const selectedCountries = (query.countries) ? query.countries.split('2C') : ['world'];
+  const selectedDuration = (query.duration) ? query.duration : 15;
+
+  return { selectedCountries, selectedDuration };
+}
+
 function App() {
-  downloadCSV(['Brazil']).then((countries) => {
-    console.log(countries);
-  });
+  const [countries, setcountries] = useState(null);
+  const [getInfo, setGetInfo] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const { selectedCountries } = getQuery(location);
+    getInfoCountries(selectedCountries).then((res) => {
+      if (!getInfo) {
+        setcountries(res);
+        setGetInfo(true);
+      }
+    });
+  }, [countries]);
 
   return (
     <div className="App">

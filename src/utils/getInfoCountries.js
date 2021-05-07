@@ -30,7 +30,7 @@ function GroupCountryByCode(json) {
   return Object.fromEntries(counstriesMap);
 }
 
-export default function getInfo(queryCountries) {
+export default function getInfoCountries(queryCountries) {
   const countries = filterCountries(queryCountries);
   return downloadCSV().then((json) => {
     const countriesOrg = GroupCountryByCode(json);
