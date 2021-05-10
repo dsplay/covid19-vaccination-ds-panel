@@ -37,19 +37,16 @@ function getQuery(location) {
 
 function App() {
   const [countries, setcountries] = useState(null);
-  const [getInfo, setGetInfo] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     const { selectedCountries } = getQuery(location);
     getInfoCountries(selectedCountries).then((res) => {
-      if (!getInfo) {
-        setcountries(res);
-        setGetInfo(true);
-      }
+      console.log(countries);
+      setcountries(res);
     });
-  }, [countries]);
+  }, []);
 
   return (
     <div className="App">
