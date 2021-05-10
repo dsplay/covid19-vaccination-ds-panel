@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CountUp from 'react-countup';
 
+import NumberFormatter from '../../utils/NumberFormatter';
 import './Card.css';
 
 function Card({ title, value }) {
@@ -10,7 +12,12 @@ function Card({ title, value }) {
         { title }
       </h3>
       <h3>
-        { value }
+        <CountUp
+          start={0}
+          end={value}
+          duration={2}
+          formattingFn={NumberFormatter}
+        />
       </h3>
     </div>
   );
