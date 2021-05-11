@@ -8,41 +8,30 @@ import CardList from './components/CardList/CardList';
 
 import getInfoCountries from './utils/getInfoCountries';
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
-const GraphDataMock = {
-  labels,
-  fill: false,
-  datasets: [
-    {
-      label: 'mortes',
-      fill: 'start',
-      data: [1, 5, 1, 12, 56, 45, 67, 78],
-      borderColor: 'rgba(226, 106, 106, 1)',
-      backgroundColor: 'rgba(255, 255, 255, 1)', // background padrao
-    },
-  ],
-};
-
 function getQuery(location) {
   const query = queryString.parse(location.search);
 
-  const selectedCountries = (query.countries) ? query.countries.split('2C') : ['world'];
-  const selectedDuration = (query.duration) ? query.duration : 15;
+  const selectedMode = (query.mode && query.mode === 'WORLDWIDE') ? 'World' : 'LOCATION';
 
-  return { selectedCountries, selectedDuration };
+  return { selectedMode };
 }
 
 function App() {
-  const [countries, setcountries] = useState(null);
+  const [countries, setCountries] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState();
 
   const location = useLocation();
+  // const userCoordinates = navigator.geolocation.getCurrentPosition();
 
   useEffect(() => {
-    const { selectedCountries } = getQuery(location);
-    getInfoCountries(selectedCountries).then((res) => {
+    const { selectedMode } = getQuery(location);
+    console.log(selectedMode);
+    getInfoCountries('World').then((response) => {
+      const countriesFiltered = response.countries;
+      const countrySelectedFiltered = response.selectedCountry;
       console.log(countries);
-      setcountries(res);
+      setSelectedCountry(countrySelectedFiltered);
+      setCountries(countriesFiltered);
     });
   }, []);
 
@@ -52,7 +41,7 @@ function App() {
     <div className="App">
       <h1> Covid-19 Vaccination </h1>
       <div className="graph-wrapper">
-        <Graph data={GraphDataMock} />
+        <Graph country={selectedCountry} />
       </div>
       <div className="cards-wrapper">
         <CardList />

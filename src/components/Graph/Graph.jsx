@@ -2,7 +2,31 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-function Graph({ data }) {
+import numberFormatter from '../../utils/NumberFormatter';
+
+function Graph({ country }) {
+  const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
+  const dates = countryVaccinationRecord.map((record) => record.date);
+  const peopleVaccinated = countryVaccinationRecord.map((record) => record.people_vaccinated);
+  const data = {
+    labels: dates,
+    countryVaccinationRecord,
+    fill: false,
+    datasets: [
+      {
+        fill: 'start',
+        data: peopleVaccinated,
+        borderColor: 'rgba( 124, 252, 0, 1 )',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        elements: {
+          point: {
+            radius: 0,
+          },
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <Line
@@ -14,6 +38,30 @@ function Graph({ data }) {
           interaction: {
             intersect: false,
           },
+          plugins: {
+            title: {
+              display: true,
+              text: 'vaccination over the time',
+            },
+            legend: {
+              display: false,
+            },
+          },
+
+          scales: {
+            x: {
+              max: 80,
+              min: 0,
+            },
+            y: {
+              ticks: {
+                callback(value) {
+                  if (value === 0) return 0;
+                  return numberFormatter(value);
+                },
+              },
+            },
+          },
         }}
       />
     </>
@@ -21,7 +69,7 @@ function Graph({ data }) {
 }
 
 Graph.propTypes = {
-  data: PropTypes.objectOf.isRequired,
+  country: PropTypes.objectOf(Array).isRequired,
 };
 
 export default Graph;
