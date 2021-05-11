@@ -5,20 +5,21 @@ import CountUp from 'react-countup';
 import NumberFormatter from '../../utils/NumberFormatter';
 import './Card.css';
 
-function Card({ title, value }) {
+function Card({ title, value, detail }) {
   return (
     <div className="card">
       <h3>
         { title }
       </h3>
-      <h3>
-        <CountUp
-          start={0}
-          end={value}
-          duration={2}
-          formattingFn={NumberFormatter}
-        />
-      </h3>
+      <CountUp
+        start={0}
+        end={value}
+        duration={2}
+        formattingFn={NumberFormatter}
+      />
+      <h5>
+        { detail }
+      </h5>
     </div>
   );
 }
@@ -26,6 +27,7 @@ function Card({ title, value }) {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  detail: PropTypes.string.isRequired,
 };
 
 export default Card;

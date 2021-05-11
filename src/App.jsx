@@ -39,12 +39,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1> Covid-19 Vaccination </h1>
-      <div className="graph-wrapper">
-        <Graph country={selectedCountry} />
+      <div className="h-20 title">
+        <h1> Covid-19 Vaccination </h1>
       </div>
-      <div className="cards-wrapper">
-        <CardList />
+      <div className="h-60">
+        <div className="cards-wrapper">
+          <CardList country={selectedCountry} />
+        </div>
+        <div className="graph-wrapper">
+          <Graph country={selectedCountry} />
+        </div>
       </div>
     </div>
   );
