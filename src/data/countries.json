@@ -2,36 +2,43 @@
   "US": {
     "flag": "🇺🇸",
     "code": "USA",
-    "population": 331002651
+    "population": 331002651,
+    "defaultColor": "rgba(207, 0, 15, 1)"
   },
   "Germany": {
     "flag": "🇩🇪",
     "code": "DEU",
-    "population": 83783942
+    "population": 83783942,
+    "defaultColor": "rgba(207, 0, 15, 1)"
   },
   "Cameroon": {
     "flag": "🇨🇲",
     "code": "CMR",
-    "population": 26545864	
+    "population": 26545864,
+    "defaultColor": "rgba(207, 0, 15, 1)"
   },
   "China": {
     "flag": "🇨🇳",
     "code": "CHN",
-    "population": 1439323776
+    "population": 1439323776,
+    "defaultColor": "rgba(207, 0, 15, 1)"
   },
   "India": {
     "flag": "🇮🇳",
     "code": "IND",
-    "population": 1380004385
+    "population": 1380004385,
+    "defaultColor": "rgba(29, 255, 0, 1)"
   },
   "Russia": {
     "flag": "🇷🇺",
     "code": "RUS",
-    "population": 145934462
+    "population": 145934462,
+    "defaultColor": "rgba(207, 0, 15, 1)"
   },
   "Brazil": {
     "flag": "🇧🇷",
     "code": "BRA",
-    "population": 211755692
+    "population": 211755692,
+    "defaultColor": "rgba(29, 255, 0, 1)"
   }
 }
