@@ -20,6 +20,8 @@ function FilterInfoCountries(json, nameSelectedCountry) {
         people_vaccinated: line.people_vaccinated,
         people_fully_vaccinated: line.people_fully_vaccinated,
         total_vaccinations: line.total_vaccinations,
+        people_vaccinated_per_hundred: line.people_vaccinated_per_hundred,
+        people_fully_vaccinated_per_hundred: line.people_fully_vaccinated_per_hundred,
       });
     }
   });

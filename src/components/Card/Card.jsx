@@ -13,12 +13,12 @@ function Card({ title, value, detail }) {
       </h3>
       <CountUp
         start={0}
-        end={value}
+        end={Number(value)}
         duration={2}
         formattingFn={NumberFormatter}
       />
       <h5>
-        { detail }
+        { detail ? `${Number(detail).toFixed(1)}%` : '' }
       </h5>
     </div>
   );
@@ -26,7 +26,7 @@ function Card({ title, value, detail }) {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   detail: PropTypes.string.isRequired,
 };
 
