@@ -19,6 +19,9 @@
         "react-hooks"
     ],
     "rules": {
-      "no-param-reassign": "warn"
+      "no-param-reassign": "warn",
+      "no-unused-vars": ["error", {
+        "argsIgnorePattern": "_"
+      }]
     }
 }

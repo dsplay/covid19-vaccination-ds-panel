@@ -18,8 +18,8 @@ function getQuery(location) {
 }
 
 function App() {
-  const [countries, setCountries] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState();
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const location = useLocation();
 
@@ -51,7 +51,7 @@ function App() {
         </div>
       </div>
       <div>
-        <Table countries={countries} />
+        <Table countriesInfo={countries} />
       </div>
     </div>
   );

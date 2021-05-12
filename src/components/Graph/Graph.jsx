@@ -5,7 +5,6 @@ import { Line } from 'react-chartjs-2';
 import numberFormatter from '../../utils/NumberFormatter';
 
 function Graph({ country }) {
-  console.log(country);
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord.map((record) => record.date);
   const peopleVaccinated = countryVaccinationRecord.map((record) => record.people_vaccinated);

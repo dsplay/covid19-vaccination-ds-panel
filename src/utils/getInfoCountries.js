@@ -43,7 +43,7 @@ function FilterInfoCountries(json, nameSelectedCountry) {
   selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord;
   countries.delete(codeSelectedCountry);
 
-  return { countries, selectedCountry };
+  return { countries: [...countries].map(([_, value]) => value), selectedCountry };
 }
 
 export default function getInfoCountries(selectedCountry) {
