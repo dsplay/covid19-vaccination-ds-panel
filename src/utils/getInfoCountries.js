@@ -40,6 +40,7 @@ function FilterInfoCountries(json, nameSelectedCountry) {
   const codeSelectedCountry = CountryBase[nameSelectedCountry].code;
   const selectedCountry = countries.get(codeSelectedCountry);
   selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord;
+  countries.delete(codeSelectedCountry);
 
   return { countries, selectedCountry };
 }
