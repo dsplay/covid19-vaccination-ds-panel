@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-
-import './App.css';
 import { useLocation } from 'react-router-dom';
 import * as queryString from 'query-string';
-import Graph from './components/Graph/Graph';
-import CardList from './components/CardList/CardList';
 
 import getInfoCountries from './utils/getInfoCountries';
+
+import './App.css';
+import Graph from './components/Graph/Graph';
+import CardList from './components/CardList/CardList';
+import Table from './components/Table/Table';
 
 function getQuery(location) {
   const query = queryString.parse(location.search);
@@ -21,7 +22,6 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState();
 
   const location = useLocation();
-  // const userCoordinates = navigator.geolocation.getCurrentPosition();
 
   useEffect(() => {
     const { selectedMode } = getQuery(location);
@@ -49,6 +49,9 @@ function App() {
         <div className="graph-wrapper">
           <Graph country={selectedCountry} />
         </div>
+      </div>
+      <div>
+        <Table countries={countries} />
       </div>
     </div>
   );

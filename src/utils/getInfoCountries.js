@@ -33,6 +33,7 @@ function FilterInfoCountries(json, nameSelectedCountry) {
       selectedCountryVaccinationRecord.push({
         date: line.date,
         people_vaccinated: line.people_vaccinated,
+        people_fully_vaccinated: line.people_fully_vaccinated,
       });
     }
   });
