@@ -20,6 +20,7 @@ function getQuery(location) {
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [language, setLanguage] = useState('en-US');
 
   const location = useLocation();
 
@@ -35,6 +36,9 @@ function App() {
     const response = await getInfoCountries(selectedCountryName);
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
+    const browserLanguage = navigator.language || navigator.userLanguage;
+
+    setLanguage(browserLanguage);
     setSelectedCountry(countrySelectedFiltered);
     setCountries(countriesFiltered);
   }, []);
@@ -51,7 +55,7 @@ function App() {
         </div>
         <div className="h-20 flex elements-in-row">
           <Table countries={countries} />
-          <QRCode className="qr-code" value="https://news.google.com/covid19/map?hl=en-US" />
+          <QRCode className="qr-code" value={`https://news.google.com/covid19/map?hl=${language}`} />
         </div>
       </div>
     );
