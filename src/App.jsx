@@ -14,7 +14,10 @@ import Table from './components/Table/Table';
 
 function getQuery(location) {
   const query = queryString.parse(location.search);
-  return (query.mode && query.mode === globalConsts.params.mode.WORLDWIDE) ? 'World' : null;
+  if (query.mode && query.mode === globalConsts.params.mode.WORLDWIDE) {
+    return globalConsts.countries.default;
+  }
+  return null;
 }
 
 function App() {
