@@ -4,6 +4,8 @@ import * as queryString from 'query-string';
 import QRCode from 'qrcode.react';
 
 import getInfoCountries from './utils/getInfoCountries';
+import getLocationUser from './utils/getUserCountry';
+import globalConsts from './utils/conts';
 
 import './App.css';
 import Graph from './components/Graph/Graph';
@@ -12,10 +14,7 @@ import Table from './components/Table/Table';
 
 function getQuery(location) {
   const query = queryString.parse(location.search);
-
-  const selectedMode = (query.mode && query.mode === 'WORLDWIDE') ? 'World' : 'LOCATION';
-
-  return { selectedMode };
+  return (query.mode && query.mode === globalConsts.params.mode.WORLDWIDE) ? 'World' : null;
 }
 
 function App() {
@@ -25,9 +24,15 @@ function App() {
   const location = useLocation();
 
   useEffect(async () => {
-    const { selectedMode } = getQuery(location);
-    console.log(selectedMode);
-    const response = await getInfoCountries('World');
+    const selectedMode = getQuery(location);
+    const { countryName, hasCountry } = await getLocationUser();
+    let selectedCountryName;
+    if (!selectedMode && hasCountry) {
+      selectedCountryName = countryName;
+    } else {
+      selectedCountryName = selectedMode;
+    }
+    const response = await getInfoCountries(selectedCountryName);
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
     setSelectedCountry(countrySelectedFiltered);
