@@ -3,7 +3,7 @@ import QRCode from 'qrcode.react';
 
 import getInfoCountries from './utils/getInfoCountries';
 import getLocationUser from './utils/getUserCountry';
-import globalConsts from './utils/conts';
+import globalConsts from './utils/consts';
 
 import './App.css';
 import Graph from './components/Graph/Graph';
