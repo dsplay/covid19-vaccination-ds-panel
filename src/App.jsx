@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import * as queryString from 'query-string';
 import QRCode from 'qrcode.react';
 
 import getInfoCountries from './utils/getInfoCountries';
@@ -12,9 +10,10 @@ import Graph from './components/Graph/Graph';
 import CardList from './components/CardList/CardList';
 import Table from './components/Table/Table';
 
-function getQuery(location) {
-  const query = queryString.parse(location.search);
-  if (query.mode && query.mode === globalConsts.params.mode.WORLDWIDE) {
+function getQuery() {
+  const parsedUrl = new URL(window.location.href);
+  const mode = parsedUrl.searchParams.get('mode');
+  if (mode && mode === globalConsts.params.mode.WORLDWIDE) {
     return globalConsts.countries.default;
   }
   return null;
@@ -25,10 +24,8 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [language, setLanguage] = useState('en-US');
 
-  const location = useLocation();
-
   useEffect(async () => {
-    const selectedMode = getQuery(location);
+    const selectedMode = getQuery();
     const { countryName, hasCountry } = await getLocationUser();
     let selectedCountryName;
     if (!selectedMode && hasCountry) {
