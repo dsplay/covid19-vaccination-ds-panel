@@ -8,15 +8,16 @@ export default function useInterval(callback, delay) {
     savedCallback.current = callback;
   }, [callback]);
 
+  function tick() {
+    savedCallback.current();
+  }
+
   // Set up the interval.
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
     if (delay !== null) {
       const id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      // return () => clearInterval(id);
+      clearInterval(id);
     }
   }, [delay]);
 }

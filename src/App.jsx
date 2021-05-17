@@ -26,14 +26,14 @@ function App() {
 
   useEffect(async () => {
     const selectedMode = getQuery();
-    const { countryName, hasCountry } = await getLocationUser();
-    let selectedCountryName;
-    if (!selectedMode && hasCountry) {
-      selectedCountryName = countryName;
+    const { countryCode } = await getLocationUser();
+    let selectedCountryCode;
+    if (!selectedMode && countryCode) {
+      selectedCountryCode = countryCode;
     } else {
-      selectedCountryName = selectedMode;
+      selectedCountryCode = selectedMode;
     }
-    const response = await getInfoCountries(selectedCountryName);
+    const response = await getInfoCountries(selectedCountryCode);
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
     const browserLanguage = navigator.language || navigator.userLanguage;
