@@ -7,47 +7,73 @@ import { flag, code } from 'country-emoji';
 const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
+const COUNTRIES_LIMIT = 18;
+
+const countriesMap = {
+  World: 'World',
+};
 
 async function downloadInfoCountries() {
   const response = await axios.get('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv');
   return CSVtoJSON(response.data, { header: true }).data;
 }
 
+function orderCountries(countries) {
+  return countries.sort(
+    (countryA, countryB) => countryB.peopleVaccinated - countryA.peopleVaccinated,
+  ).slice(0, COUNTRIES_LIMIT);
+}
+
 function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   const countries = new Map();
-
   const selectedCountryVaccinationRecord = [];
 
-  countriesInfoJSON.forEach((line) => {
-    if (line.people_vaccinated !== '0' && line.people_vaccinated !== '' && code(line.location)) {
-      countries.set(code(line.location), {
-        location: line.location,
-        date: line.date,
-        population: (Number(line.people_vaccinated)
-        / (Number(line.people_vaccinated_per_hundred) / 100)).toFixed(0),
-        flag: flag(line.location),
-        people_vaccinated: line.people_vaccinated,
-        people_fully_vaccinated: line.people_fully_vaccinated,
-        total_vaccinations: line.total_vaccinations,
-        people_vaccinated_per_hundred: line.people_vaccinated_per_hundred,
-        people_fully_vaccinated_per_hundred: line.people_fully_vaccinated_per_hundred,
+  countriesInfoJSON.forEach(({
+    location,
+    date,
+    total_vaccinations: totalVaccinations,
+    people_vaccinated: peopleVaccinated = '',
+    people_vaccinated_per_hundred: peopleVaccinatedPerHundred = '',
+    people_fully_vaccinated: peopleFullyVaccinated,
+    people_fully_vaccinated_per_hundred: peopleFullyVaccinatedPerHundred,
+  }) => {
+    const codeCountry = code(location) || countriesMap[location];
+
+    if (
+      !countries.has(codeCountry)
+      && peopleVaccinated.trim() !== ''
+      && peopleVaccinatedPerHundred.trim() !== ''
+      && Number(peopleVaccinatedPerHundred) !== 0
+      && codeCountry
+    ) {
+      countries.set(codeCountry, {
+        location,
+        date,
+        population: (Number(peopleVaccinated)
+        / (Number(peopleVaccinatedPerHundred) / 100)).toFixed(0),
+        flag: flag(location),
+        peopleVaccinated,
+        peopleFullyVaccinated,
+        totalVaccinations,
+        peopleVaccinatedPerHundred,
+        peopleFullyVaccinatedPerHundred,
       });
     }
 
-    if (line.people_vaccinated !== '0' && line.people_vaccinated !== '' && code(line.location) === codeSelectedCountry) {
+    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && code(location) === codeSelectedCountry) {
       selectedCountryVaccinationRecord.push({
-        date: line.date,
-        people_vaccinated: line.people_vaccinated,
-        people_fully_vaccinated: line.people_fully_vaccinated,
+        date,
+        peopleVaccinated,
+        peopleFullyVaccinated,
       });
     }
   });
 
   const selectedCountry = countries.get(codeSelectedCountry);
-  selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord;
+  selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord.reverse();
   countries.delete(codeSelectedCountry);
 
-  return { countries: [...countries].map(([_, value]) => value), selectedCountry };
+  return { countries: orderCountries([...countries].map(([_, value]) => value)), selectedCountry };
 }
 
 function getDataLocalStorage() {
@@ -79,7 +105,9 @@ export default async function getInfoCountries(codeSelectedCountry) {
 
   const countriesInfoJSON = await downloadInfoCountries();
   if (countriesInfoJSON) {
-    const countriesInfoFiltered = filterInfoCountries(countriesInfoJSON, codeSelectedCountry);
+    const countriesInfoFiltered = filterInfoCountries(
+      countriesInfoJSON.reverse(), codeSelectedCountry,
+    );
     setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered);
     return countriesInfoFiltered;
   }
