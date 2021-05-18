@@ -7,6 +7,12 @@ import './CardList.css';
 function CardList({ className, country }) {
   return (
     <div className={`cards-wrapper ${className}`}>
+      <div className="w-100">
+        <h1 className="title-card-list">
+          { country.flag }
+          { country.location}
+        </h1>
+      </div>
       <Card key={1} title="Population" value={(country) ? country.population : 0} />
       <Card key={2} title="Doses Given" value={(country) ? country.totalVaccinations : 0} />
       <Card key={3} title="people with at least 1 dose" value={(country) ? country.peopleVaccinated : 0} detail={(country) ? country.peopleVaccinatedPerHundred : 0} />
