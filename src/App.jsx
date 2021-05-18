@@ -3,7 +3,6 @@ import QRCode from 'qrcode.react';
 
 import getInfoCountries from './utils/getInfoCountries';
 import getLocationUser from './utils/getUserCountry';
-import globalConsts from './utils/consts';
 
 import './App.css';
 import Graph from './components/Graph/Graph';
@@ -13,8 +12,8 @@ import Table from './components/Table/Table';
 function getQuery() {
   const parsedUrl = new URL(window.location.href);
   const mode = parsedUrl.searchParams.get('mode');
-  if (mode && mode === globalConsts.params.mode.WORLDWIDE) {
-    return globalConsts.countries.default;
+  if (mode && mode === 'WORLDWIDE') {
+    return 'World';
   }
   return null;
 }
