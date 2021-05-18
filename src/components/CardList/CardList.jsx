@@ -10,7 +10,7 @@ function CardList({ className, country }) {
       <Card key={1} title="Population" value={(country) ? country.population : 0} />
       <Card key={2} title="Doses Given" value={(country) ? country.totalVaccinations : 0} />
       <Card key={3} title="people with at least 1 dose" value={(country) ? country.peopleVaccinated : 0} detail={(country) ? country.peopleVaccinatedPerHundred : 0} />
-      <Card key={4} title="people fully vaccinated" value={(country) ? country.people_fully_vaccinated : 0} detail={(country) ? country.peopleFullyVaccinatedPerHundred : 0} />
+      <Card key={4} title="people fully vaccinated" value={(country) ? country.peopleFullyVaccinated : 0} detail={(country) ? country.peopleFullyVaccinatedPerHundred : 0} />
     </div>
   );
 }

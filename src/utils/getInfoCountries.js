@@ -7,6 +7,9 @@ import { flag, code } from 'country-emoji';
 const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
+const KEY_VERSION = 'version';
+const VERSION = '1.0';
+
 const COUNTRIES_LIMIT = 18;
 
 const countriesMap = {
@@ -86,6 +89,7 @@ function setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered) {
   localStorage.setItem(KEY_DATA, compressToUTF16(JSON.stringify(countriesInfoFiltered)));
   localStorage.setItem(KEY_UPDATED, moment().utc().toISOString());
   localStorage.setItem(KEY_SELECTED, codeSelectedCountry);
+  localStorage.setItem(KEY_VERSION, VERSION);
 }
 
 function dataLocalStorageIsValid(codeSelectedCountry) {
