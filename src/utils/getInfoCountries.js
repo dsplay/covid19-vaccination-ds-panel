@@ -13,7 +13,7 @@ async function downloadInfoCountries() {
   return CSVtoJSON(response.data, { header: true }).data;
 }
 
-function FilterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
+function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   const countries = new Map();
 
   const selectedCountryVaccinationRecord = [];
@@ -79,7 +79,7 @@ export default async function getInfoCountries(codeSelectedCountry) {
 
   const countriesInfoJSON = await downloadInfoCountries();
   if (countriesInfoJSON) {
-    const countriesInfoFiltered = FilterInfoCountries(countriesInfoJSON, codeSelectedCountry);
+    const countriesInfoFiltered = filterInfoCountries(countriesInfoJSON, codeSelectedCountry);
     setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered);
     return countriesInfoFiltered;
   }
