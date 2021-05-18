@@ -12,6 +12,7 @@ function Card({ title, value, detail }) {
         { title }
       </h3>
       <CountUp
+        className="text-secondary-color"
         start={0}
         end={Number(value)}
         duration={2}
