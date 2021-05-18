@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import numberFormatter from '../../utils/NumberFormatter';
+
 function Line({ country }) {
   return (
     <tr>
@@ -8,16 +10,16 @@ function Line({ country }) {
         { `${country.flag} ${country.location}` }
       </td>
       <td>
-        { country.population || '-'}
+        { numberFormatter(country.population) || '-'}
       </td>
       <td>
-        { country.total_vaccinations || '-' }
+        { numberFormatter(country.totalVaccinations) || '-' }
       </td>
       <td>
-        { country.people_vaccinated || '-' }
+        { numberFormatter(country.peopleVaccinated) || '-' }
       </td>
       <td>
-        { country.people_fully_vaccinated || '-' }
+        { numberFormatter(country.peopleFullyVaccinated) || '-' }
       </td>
     </tr>
   );

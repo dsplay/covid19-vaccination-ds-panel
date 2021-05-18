@@ -51,7 +51,7 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
         date,
         population: (Number(peopleVaccinated)
         / (Number(peopleVaccinatedPerHundred) / 100)).toFixed(0),
-        flag: flag(location),
+        flag: flag(location) || '🌐',
         peopleVaccinated,
         peopleFullyVaccinated,
         totalVaccinations,

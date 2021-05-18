@@ -7,9 +7,9 @@ import numberFormatter from '../../utils/NumberFormatter';
 function Graph({ className, country }) {
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord.map((record) => record.date);
-  const peopleVaccinated = countryVaccinationRecord.map((record) => record.people_vaccinated);
+  const peopleVaccinated = countryVaccinationRecord.map((record) => record.peopleVaccinated);
   const peopleFullyVaccinated = countryVaccinationRecord
-    .map((record) => record.people_fully_vaccinated);
+    .map((record) => record.peopleFullyVaccinated);
   const data = {
     labels: dates,
     countryVaccinationRecord,
