@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
 
 import translateCountryName from '../../utils/countriesNameTranslate';
 import Card from '../Card/Card';
 
 import './CardList.css';
 
-function CardList({ className, country, language }) {
+function CardList({ className, country }) {
   const { t } = useTranslation();
 
   return (
     <div className={`cards-wrapper ${className}`}>
       <div className="w-100">
         <h1 className="title-card-list">
-          { `${country.flag}   ${translateCountryName(language, country.code) || t(country.location)}` }
+          { `${country.flag}   ${translateCountryName(i18n.language, country.code) || t(country.location)}` }
         </h1>
       </div>
       <Card key={1} title="Population" value={(country) ? country.population : 0} />
@@ -28,7 +29,6 @@ function CardList({ className, country, language }) {
 CardList.propTypes = {
   country: PropTypes.objectOf(Array).isRequired,
   className: PropTypes.string,
-  language: PropTypes.string.isRequired,
 };
 
 CardList.defaultProps = {

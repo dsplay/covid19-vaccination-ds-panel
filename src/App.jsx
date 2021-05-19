@@ -19,7 +19,6 @@ function getQuery() {
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [language] = useState(i18n.language);
 
   useEffect(async () => {
     const selectedMode = getQuery();
@@ -42,7 +41,7 @@ function App() {
     return (
       <div className="App">
         <I18nextProvider i18n={i18n}>
-          <MainPage countries={countries} selectedCountry={selectedCountry} language={language} />
+          <MainPage countries={countries} selectedCountry={selectedCountry} />
         </I18nextProvider>
       </div>
     );
