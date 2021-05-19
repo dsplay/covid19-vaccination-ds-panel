@@ -11,7 +11,6 @@ function Graph({ className, country }) {
   const peopleFullyVaccinated = countryVaccinationRecord
     .map((record) => record.peopleFullyVaccinated);
 
-  console.log(dates);
   const data = {
     labels: dates,
     countryVaccinationRecord,
