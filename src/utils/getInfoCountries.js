@@ -67,7 +67,7 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
       });
     }
 
-    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && code(location) === codeSelectedCountry) {
+    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && codeCountry === codeSelectedCountry) {
       selectedCountryVaccinationRecord.push({
         date,
         peopleVaccinated,
