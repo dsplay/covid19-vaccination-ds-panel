@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CountUp from 'react-countup';
+import { useTranslation } from 'react-i18next';
 
 import NumberFormatter from '../../utils/NumberFormatter';
 import './Card.css';
 
 function Card({ title, value, detail }) {
+  const { t } = useTranslation();
+
   return (
     <div className="card">
-      <h3>
-        { title }
-      </h3>
+      <h3>{ t(title) }</h3>
       <CountUp
         className="card-value"
         start={0}

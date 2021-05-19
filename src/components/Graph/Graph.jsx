@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
 import numberFormatter from '../../utils/NumberFormatter';
 
 function Graph({ className, country }) {
+  const { t } = useTranslation();
+
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord.map((record) => record.date);
   const peopleVaccinated = countryVaccinationRecord.map((record) => record.peopleVaccinated);
@@ -57,7 +60,7 @@ function Graph({ className, country }) {
           plugins: {
             title: {
               display: true,
-              text: 'vaccination over the time',
+              text: t('vaccination over the time'),
             },
             legend: {
               display: false,

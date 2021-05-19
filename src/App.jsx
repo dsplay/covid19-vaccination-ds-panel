@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode.react';
+import { I18nextProvider } from 'react-i18next';
 
+import i18n from './i18n';
 import getInfoCountries from './utils/getInfoCountries';
 import getLocationUser from './utils/getUserCountry';
 
-import './App.css';
-import Graph from './components/Graph/Graph';
-import CardList from './components/CardList/CardList';
-import Table from './components/Table/Table';
+import MainPage from './Pages/MainPage';
 
 function getQuery() {
   const parsedUrl = new URL(window.location.href);
@@ -21,7 +19,7 @@ function getQuery() {
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [language, setLanguage] = useState('en-US');
+  const [language] = useState(i18n.language);
 
   useEffect(async () => {
     const selectedMode = getQuery();
@@ -35,9 +33,7 @@ function App() {
     const response = await getInfoCountries(selectedCountryCode);
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
-    const browserLanguage = navigator.language || navigator.userLanguage;
 
-    setLanguage(browserLanguage);
     setSelectedCountry(countrySelectedFiltered);
     setCountries(countriesFiltered);
   }, []);
@@ -45,21 +41,15 @@ function App() {
   if (countries.length > 1) {
     return (
       <div className="App">
-        <div className="h-15 flex elements-in-center">
-          <h1> Covid-19 Vaccination </h1>
-        </div>
-        <div className="h-60 flex elements-in-row">
-          <CardList className="w-40 h-100" country={selectedCountry} />
-          <Graph className="w-60 h-100" country={selectedCountry} />
-        </div>
-        <div className="h-20 flex elements-in-row">
-          <Table countries={countries} />
-          <QRCode className="qr-code" value={`https://news.google.com/covid19/map?hl=${language}`} />
-        </div>
+        <I18nextProvider i18n={i18n}>
+          <MainPage countries={countries} selectedCountry={selectedCountry} language={language} />
+        </I18nextProvider>
       </div>
     );
   }
-  return <div> Loading </div>;
+  return (
+    <div>Loading</div>
+  );
 }
 
 export default App;

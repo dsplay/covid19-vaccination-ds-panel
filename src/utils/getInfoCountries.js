@@ -8,13 +8,15 @@ const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
-const VERSION = '1.0';
+const VERSION = '1.1';
 
 const COUNTRIES_LIMIT = 18;
 
 const countriesMap = {
   World: 'World',
 };
+
+const forbiddenCode = ['EU'];
 
 async function downloadInfoCountries() {
   const response = await axios.get('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv');
@@ -23,7 +25,7 @@ async function downloadInfoCountries() {
 
 function orderCountries(countries) {
   return countries.sort(
-    (countryA, countryB) => countryB.peopleVaccinated - countryA.peopleVaccinated,
+    (countryA, countryB) => countryB.totalVaccinations - countryA.totalVaccinations,
   ).slice(0, COUNTRIES_LIMIT);
 }
 
@@ -48,10 +50,12 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
       && peopleVaccinatedPerHundred.trim() !== ''
       && Number(peopleVaccinatedPerHundred) !== 0
       && codeCountry
+      && !forbiddenCode.includes(codeCountry)
     ) {
       countries.set(codeCountry, {
         location,
         date,
+        code: codeCountry,
         population: (Number(peopleVaccinated)
         / (Number(peopleVaccinatedPerHundred) / 100)).toFixed(0),
         flag: flag(location) || '🌐',
@@ -95,10 +99,12 @@ function setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered) {
 function dataLocalStorageIsValid(codeSelectedCountry) {
   const lastUpdate = localStorage.getItem(KEY_UPDATED);
   const previouscodeSelectedCountry = localStorage.getItem(KEY_SELECTED);
+  const version = localStorage.getItem(KEY_VERSION);
   if (!lastUpdate) return false;
   if (!previouscodeSelectedCountry) return false;
   if (previouscodeSelectedCountry !== codeSelectedCountry) return false;
   if (moment().diff(lastUpdate, 'days') > 1) return false;
+  if (version !== VERSION) return false;
   return true;
 }
 
@@ -113,6 +119,7 @@ export default async function getInfoCountries(codeSelectedCountry) {
       countriesInfoJSON.reverse(), codeSelectedCountry,
     );
     setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered);
+    console.log(countriesInfoFiltered);
     return countriesInfoFiltered;
   }
 

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import Line from './Line';
 import useInterval from '../../utils/useInterval';
 
-function Table({ countries }) {
+function Table({ countries = [] }) {
+  const { t } = useTranslation();
+
   const ELEMENTS_BY_PAGE = 3;
   const NUMBER_OF_PAGES = Math.ceil(countries.length / ELEMENTS_BY_PAGE);
 
@@ -27,11 +30,11 @@ function Table({ countries }) {
     <>
       <table>
         <tr>
-          <th> Location </th>
-          <th> Population </th>
-          <th> Doses Given </th>
-          <th> % at least 1 dose </th>
-          <th> % fully vaccinated </th>
+          <th>{t('Country')}</th>
+          <th>{t('Population')}</th>
+          <th>{t('Doses Given')}</th>
+          <th>{t('% at least 1 dose')}</th>
+          <th>{t('% fully vaccinated')}</th>
         </tr>
         { lines }
       </table>
