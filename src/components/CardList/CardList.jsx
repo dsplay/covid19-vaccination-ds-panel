@@ -9,8 +9,7 @@ function CardList({ className, country }) {
     <div className={`cards-wrapper ${className}`}>
       <div className="w-100">
         <h1 className="title-card-list">
-          { country.flag }
-          { country.location}
+          { `${country.flag}   ${country.location}` }
         </h1>
       </div>
       <Card key={1} title="Population" value={(country) ? country.population : 0} />

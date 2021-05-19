@@ -12,14 +12,14 @@ function Card({ title, value, detail }) {
         { title }
       </h3>
       <CountUp
-        className="text-secondary-color"
+        className="card-value"
         start={0}
         end={Number(value)}
         duration={2}
         formattingFn={NumberFormatter}
       />
-      <h5>
-        { detail ? `${Number(detail).toFixed(1)}%` : '' }
+      <h5 className="card-detail">
+        { detail ? `(${Number(detail).toFixed(1)}%)` : '' }
       </h5>
     </div>
   );

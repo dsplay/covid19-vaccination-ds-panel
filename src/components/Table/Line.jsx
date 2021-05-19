@@ -3,23 +3,34 @@ import PropTypes from 'prop-types';
 
 import numberFormatter from '../../utils/NumberFormatter';
 
+import './Line.css';
+
 function Line({ country }) {
+  const {
+    flag,
+    location = 0,
+    population = 0,
+    totalVaccinations = 0,
+    peopleVaccinatedPerHundred = '-',
+    peopleFullyVaccinatedPerHundred = '-',
+  } = country;
+
   return (
     <tr>
       <td>
-        { `${country.flag} ${country.location}` }
+        { `${flag} ${location}` }
       </td>
       <td>
-        { numberFormatter(country.population) || '-'}
+        { numberFormatter(population)}
       </td>
       <td>
-        { numberFormatter(country.totalVaccinations) || '-' }
+        { numberFormatter(totalVaccinations) }
       </td>
       <td>
-        { numberFormatter(country.peopleVaccinated) || '-' }
+        { `${peopleVaccinatedPerHundred}%` }
       </td>
       <td>
-        { numberFormatter(country.peopleFullyVaccinated) || '-' }
+        { `${peopleFullyVaccinatedPerHundred}%` }
       </td>
     </tr>
   );

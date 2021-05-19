@@ -10,17 +10,19 @@ function Graph({ className, country }) {
   const peopleVaccinated = countryVaccinationRecord.map((record) => record.peopleVaccinated);
   const peopleFullyVaccinated = countryVaccinationRecord
     .map((record) => record.peopleFullyVaccinated);
+
+  console.log(dates);
   const data = {
     labels: dates,
     countryVaccinationRecord,
     fill: false,
     datasets: [
       {
-        label: 'people vaccinated',
-        fill: false,
-        data: peopleVaccinated,
-        borderColor: 'rgba( 124, 252, 0, 1 )',
-        backgroundColor: 'rgba(255, 255, 255, 1)',
+        label: 'people fully vaccinated',
+        fill: true,
+        data: peopleFullyVaccinated,
+        borderColor: 'rgba(13, 115, 13, 1)',
+        backgroundColor: 'rgba(13, 115, 13, 1)',
         elements: {
           point: {
             radius: 0,
@@ -28,11 +30,11 @@ function Graph({ className, country }) {
         },
       },
       {
-        label: 'people fully vaccinated',
-        fill: false,
-        data: peopleFullyVaccinated,
-        borderColor: 'rgba( 124, 0, 0, 1 )',
-        backgroundColor: 'rgba(255, 255, 255, 1)',
+        label: 'people vaccinated',
+        fill: true,
+        data: peopleVaccinated,
+        borderColor: 'rgba( 124, 252, 0, 1 )',
+        backgroundColor: 'rgba( 124, 252, 0, 1 )',
         elements: {
           point: {
             radius: 0,
@@ -65,8 +67,13 @@ function Graph({ className, country }) {
 
           scales: {
             x: {
-              max: 80,
-              min: 0,
+              distribution: 'series',
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 6,
+                maxRotation: 0,
+                minRotation: 0,
+              },
             },
             y: {
               ticks: {

@@ -8,3 +8,12 @@
   flex-direction: column;
   height: 40%;
 }
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.card-detail {
+  font-size: 1rem;
+}
