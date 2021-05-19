@@ -119,7 +119,6 @@ export default async function getInfoCountries(codeSelectedCountry) {
       countriesInfoJSON.reverse(), codeSelectedCountry,
     );
     setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered);
-    console.log(countriesInfoFiltered);
     return countriesInfoFiltered;
   }
 
