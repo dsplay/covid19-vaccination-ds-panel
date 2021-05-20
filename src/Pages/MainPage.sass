@@ -1,4 +1,6 @@
 * 
+  margin: 0
+  padding: 0
   box-sizing: border-box
 
 
@@ -10,10 +12,6 @@ $text-secondary-color: #757680
   width: 100%
   margin: 0 
   padding: 0
-
-
-.h-60 
-  height: 60%
 
 h1
   font-size: 3rem
@@ -29,34 +27,53 @@ h1
   justify-content: space-between
   padding: 0% 2%
 
-
-.elements-in-center  
-  justify-content: center
-  align-items: center
-
 .align-text-center
   text-align: center
 
-.h-20 
-  height: 20%
+.wrapper-title
+  justify-content: center
+  align-items: center
+  width: 100%
+  @media(orientation: landscape)
+    height: 15%
+  @media(orientation: portrait)
+    height: 10%
+  
 
-.h-15 
-  height: 15%
+.wrapper-card-list
+  @media(orientation: landscape)
+    height: 100%
+    width: 40%
+  @media(orientation: portrait)
+    height: 50%
+    width: 100%
 
-.h-5 
-  height: 5%
+.wrapper-graph
+  @media(orientation: landscape)
+    height: 100%
+    width: 50%
+  @media(orientation: portrait)
+    height: 50%
+    width: 100%
 
+.wrapper-main-content
+  @media(orientation: landscape)
+    height: 60%
+  @media(orientation: portrait)
+    height: 70%
+
+.wrapper-footer
+  @media(orientation: landscape)
+    width: 100%
+  @media(orientation: portrait)
+    width: 80%
+    align-self: flex-end
 
 .h-100 
   height: 100%
 
-
-.w-60 
-  width: 60%
-
-
-.w-40 
-  width: 40%
+.h-20
+  height: 20%
 
 
 .w-100 

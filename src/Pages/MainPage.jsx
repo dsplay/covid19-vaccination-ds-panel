@@ -17,12 +17,12 @@ function MainPage({ selectedCountry = {}, countries = [] }) {
 
   return (
     <>
-      <div className="h-15 flex elements-in-center">
+      <div className="flex wrapper-title">
         <h1>{t('Covid-19 Vaccination')}</h1>
       </div>
-      <div className="h-60 flex elements-in-row">
-        <CardList className="w-40 h-100" country={selectedCountry} />
-        <Graph className="w-60 h-100" country={selectedCountry} />
+      <div className="wrapper-main-content flex elements-in-row">
+        <CardList className="wrapper-card-list" country={selectedCountry} />
+        <Graph className="wrapper-graph" country={selectedCountry} />
       </div>
       <div className="h-20 flex elements-in-row">
         <Table countries={translateManyNameCountries(i18n.language, countries)} />
