@@ -11,7 +11,7 @@ function Card({ title, value, detail }) {
 
   return (
     <div className="card">
-      <h3>{ t(title) }</h3>
+      <h3 className="card-title">{ t(title) }</h3>
       <CountUp
         className="card-value"
         start={0}
@@ -29,7 +29,11 @@ function Card({ title, value, detail }) {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  detail: PropTypes.string.isRequired,
+  detail: PropTypes.string,
+};
+
+Card.defaultProps = {
+  detail: '',
 };
 
 export default Card;
