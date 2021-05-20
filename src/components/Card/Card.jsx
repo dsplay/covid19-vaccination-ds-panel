@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 import { useTranslation } from 'react-i18next';
 
 import NumberFormatter from '../../utils/NumberFormatter';
-import './Card.css';
+import './Card.sass';
 
 function Card({ title, value, detail }) {
   const { t } = useTranslation();

@@ -9,7 +9,7 @@ import Graph from '../components/Graph/Graph';
 import CardList from '../components/CardList/CardList';
 import Table from '../components/Table/Table';
 
-import './MainPage.css';
+import './MainPage.sass';
 
 function MainPage({ selectedCountry = {}, countries = [] }) {
   const { t } = useTranslation();

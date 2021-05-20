@@ -6,7 +6,7 @@ import i18n from '../../i18n';
 import translateCountryName from '../../utils/countriesNameTranslate';
 import Card from '../Card/Card';
 
-import './CardList.css';
+import './CardList.sass';
 
 function CardList({ className, country }) {
   const { t } = useTranslation();

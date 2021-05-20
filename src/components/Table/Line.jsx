@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import numberFormatter from '../../utils/NumberFormatter';
 
-import './Line.css';
+import './Line.sass';
 
 function Line({ country }) {
   const {
