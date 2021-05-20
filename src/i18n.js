@@ -7,9 +7,6 @@ i18n
   .use(LanguageDetector)
   .init({
     resources: {
-      en: {
-        translations: {},
-      },
       es: {
         translations: {
           Country: 'País',
@@ -82,14 +79,13 @@ i18n
     fallbackLng: FALLBACK,
     debug: true,
 
-    // have a common namespace used around the full app
     ns: ['translations'],
     defaultNS: 'translations',
 
-    keySeparator: false, // we use content as keys
+    keySeparator: false,
 
     interpolation: {
-      escapeValue: false, // not needed for react!!
+      escapeValue: false,
       formatSeparator: ',',
     },
 
