@@ -27,8 +27,6 @@ function MainPage({ selectedCountry = {}, countries = [] }) {
       <div className="h-20 flex elements-in-row">
         <Table countries={translateManyNameCountries(i18n.language, countries)} />
         <QRCode className="qr-code" value={`https://news.google.com/covid19/map?hl=${i18n.language}`} />
-      </div>
-      <div className="w-100 h-5 align-text-center">
         <Footer className date={selectedCountry.date} />
       </div>
     </>

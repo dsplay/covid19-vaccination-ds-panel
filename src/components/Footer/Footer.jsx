@@ -4,9 +4,9 @@ import moment from 'moment';
 
 function Foot({ date }) {
   return (
-    <>
+    <div className="w-100 align-text-center">
       {`From Our World in Data - Last Updated: ${moment(date).fromNow()}`}
-    </>
+    </div>
   );
 }
 
