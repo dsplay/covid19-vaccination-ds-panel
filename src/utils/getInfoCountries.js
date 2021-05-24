@@ -8,7 +8,7 @@ const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
-const VERSION = '1.1';
+const VERSION = '1.5';
 
 const COUNTRIES_LIMIT = 18;
 
@@ -100,8 +100,8 @@ function dataLocalStorageIsValid(codeSelectedCountry) {
   const lastUpdate = localStorage.getItem(KEY_UPDATED);
   const previouscodeSelectedCountry = localStorage.getItem(KEY_SELECTED);
   const version = localStorage.getItem(KEY_VERSION);
-  if (!lastUpdate) return false;
   if (!previouscodeSelectedCountry) return false;
+  if (!lastUpdate) return false;
   if (previouscodeSelectedCountry !== codeSelectedCountry) return false;
   if (moment().diff(lastUpdate, 'days') > 1) return false;
   if (version !== VERSION) return false;
@@ -124,3 +124,7 @@ export default async function getInfoCountries(codeSelectedCountry) {
 
   return getDataLocalStorage();
 }
+
+export {
+  KEY_SELECTED,
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
-
+import { name } from 'country-emoji';
 import i18n from './i18n';
 import getInfoCountries from './utils/getInfoCountries';
 import getLocationUser from './utils/getUserCountry';
@@ -12,6 +12,8 @@ function getQuery() {
   const mode = parsedUrl.searchParams.get('mode');
   if (mode && mode === 'WORLDWIDE') {
     return 'World';
+  } if (mode && name(mode)) {
+    return mode;
   }
   return null;
 }
