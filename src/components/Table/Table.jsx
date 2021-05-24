@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Line from './Line';
@@ -60,7 +60,18 @@ function Table({ countries = [] }) {
 }
 
 Table.propTypes = {
-  countries: PropTypes.objectOf(Array).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape({
+    code: string,
+    date: string,
+    flag: string,
+    location: string,
+    peopleFullyVaccinated: string,
+    peopleFullyVaccinatedPerHundred: string,
+    peopleVaccinated: string,
+    peopleVaccinatedPerHundred: string,
+    population: string,
+    totalVaccinations: string,
+  })).isRequired,
 };
 
 export default Table;
