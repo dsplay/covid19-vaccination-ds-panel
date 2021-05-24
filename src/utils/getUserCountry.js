@@ -1,16 +1,17 @@
 import axios from 'axios';
 
-import { KEY_SELECTED } from './getInfoCountries';
+import { KEY_LOCATION, dataLocalStorageIsValid } from './getInfoCountries';
 
 export default async function getUserCountry() {
-  const locationCode = localStorage.getItem(KEY_SELECTED);
-  if (locationCode) {
-    return {
-      countryCode: locationCode,
-    };
+  try {
+    const locationCode = localStorage.getItem(KEY_LOCATION);
+    if (dataLocalStorageIsValid()) {
+      return locationCode;
+    }
+    const response = await axios.get('http://www.geoplugin.net/json.gp');
+    localStorage.setItem(KEY_LOCATION, response.data.geoplugin_countryCode);
+    return response.data.geoplugin_countryCode;
+  } catch (error) {
+    return 'World';
   }
-  const response = await axios.get('http://www.geoplugin.net/json.gp');
-  return {
-    countryCode: response.data.geoplugin_countryCode,
-  };
 }

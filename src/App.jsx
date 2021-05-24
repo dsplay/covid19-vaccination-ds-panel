@@ -24,7 +24,7 @@ function App() {
 
   useEffect(async () => {
     const selectedMode = getQuery();
-    const { countryCode } = await getLocationUser();
+    const countryCode = await getLocationUser();
     let selectedCountryCode;
     if (!selectedMode && countryCode) {
       selectedCountryCode = countryCode;

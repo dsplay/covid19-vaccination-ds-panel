@@ -8,6 +8,7 @@ const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
+const KEY_LOCATION = 'location';
 const VERSION = '1.5';
 
 const COUNTRIES_LIMIT = 18;
@@ -97,13 +98,18 @@ function setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered) {
 }
 
 function dataLocalStorageIsValid(codeSelectedCountry) {
+  const locationCode = localStorage.getItem(KEY_LOCATION);
+  if (!locationCode) return false;
+
   const lastUpdate = localStorage.getItem(KEY_UPDATED);
-  const previouscodeSelectedCountry = localStorage.getItem(KEY_SELECTED);
-  const version = localStorage.getItem(KEY_VERSION);
-  if (!previouscodeSelectedCountry) return false;
   if (!lastUpdate) return false;
-  if (previouscodeSelectedCountry !== codeSelectedCountry) return false;
   if (moment().diff(lastUpdate, 'days') > 1) return false;
+
+  const previouscodeSelectedCountry = localStorage.getItem(KEY_SELECTED);
+  if (!previouscodeSelectedCountry) return false;
+  if (previouscodeSelectedCountry !== codeSelectedCountry) return false;
+
+  const version = localStorage.getItem(KEY_VERSION);
   if (version !== VERSION) return false;
   return true;
 }
@@ -125,6 +131,4 @@ export default async function getInfoCountries(codeSelectedCountry) {
   return getDataLocalStorage();
 }
 
-export {
-  KEY_SELECTED,
-};
+export { dataLocalStorageIsValid, KEY_LOCATION };
