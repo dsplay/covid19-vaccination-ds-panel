@@ -4,13 +4,17 @@ import PropTypes from 'prop-types';
 import numberFormatter from '../../utils/NumberFormatter';
 
 function Line({ country }) {
+  if (!country) {
+    return <tr />;
+  }
+
   const {
     flag,
-    location = 0,
-    population = 0,
-    totalVaccinations = 0,
-    peopleVaccinatedPerHundred = '-',
-    peopleFullyVaccinatedPerHundred = '-',
+    location,
+    population,
+    totalVaccinations,
+    peopleVaccinatedPerHundred,
+    peopleFullyVaccinatedPerHundred,
   } = country;
 
   return (
@@ -35,7 +39,11 @@ function Line({ country }) {
 }
 
 Line.propTypes = {
-  country: PropTypes.objectOf(Array).isRequired,
+  country: PropTypes.objectOf(Array),
+};
+
+Line.defaultProps = {
+  country: null,
 };
 
 export default Line;

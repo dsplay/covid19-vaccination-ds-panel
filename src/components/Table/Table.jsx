@@ -19,7 +19,7 @@ function Table({ countries = [] }) {
 
   useInterval(() => {
     setCurrentPage((currentPage + 1) % NUMBER_OF_PAGES);
-  }, countries.length > 1 ? 15000 : null);
+  }, countries.length > 1 ? 10000 : null);
 
   let lineWorld;
   const countriesInfo = [...countries];
@@ -33,9 +33,12 @@ function Table({ countries = [] }) {
   let position;
   for (let i = 0; i < ELEMENTS_BY_PAGE; i += 1) {
     position = (currentPage * ELEMENTS_BY_PAGE) + i;
-    if (position < countriesInfo.length && countriesInfo[position].code !== 'World') {
-      lines.push(<Line key={i} country={countriesInfo[position]} />);
-    }
+    lines.push(<Line
+      key={i}
+      country={(position < countriesInfo.length)
+        ? countriesInfo[position]
+        : null}
+    />);
   }
 
   return (
