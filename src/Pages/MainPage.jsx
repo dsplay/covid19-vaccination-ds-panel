@@ -3,6 +3,7 @@ import QRCode from 'qrcode.react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import ObjectValidateCountry from '../utils/ObjectValidateCountry';
 
 import { translateManyNameCountries } from '../utils/countriesNameTranslate';
 import Graph from '../components/Graph/Graph';
@@ -34,30 +35,8 @@ function MainPage({ selectedCountry = {}, countries = [] }) {
 }
 
 MainPage.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    code: PropTypes.string,
-    date: PropTypes.string,
-    flag: PropTypes.string,
-    location: PropTypes.string,
-    peopleFullyVaccinated: PropTypes.string,
-    peopleFullyVaccinatedPerHundred: PropTypes.string,
-    peopleVaccinated: PropTypes.string,
-    peopleVaccinatedPerHundred: PropTypes.string,
-    population: PropTypes.string,
-    totalVaccinations: PropTypes.string,
-  })).isRequired,
-  selectedCountry: PropTypes.shape({
-    code: PropTypes.string,
-    date: PropTypes.string,
-    flag: PropTypes.string,
-    location: PropTypes.string,
-    peopleFullyVaccinated: PropTypes.string,
-    peopleFullyVaccinatedPerHundred: PropTypes.string,
-    peopleVaccinated: PropTypes.string,
-    peopleVaccinatedPerHundred: PropTypes.string,
-    population: PropTypes.string,
-    totalVaccinations: PropTypes.string,
-  }).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape(ObjectValidateCountry)).isRequired,
+  selectedCountry: PropTypes.shape(ObjectValidateCountry).isRequired,
 };
 
 export default MainPage;

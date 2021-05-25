@@ -3,6 +3,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 
+import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
 import numberFormatter from '../../utils/NumberFormatter';
 
 function Graph({ className, country }) {
@@ -93,7 +94,7 @@ function Graph({ className, country }) {
 }
 
 Graph.propTypes = {
-  country: PropTypes.objectOf(Array).isRequired,
+  country: PropTypes.shape(ObjectValidateCountry).isRequired,
   className: PropTypes.string,
 };
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Line from './Line';
+import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
 import useInterval from '../../utils/useInterval';
 
 import './Table.sass';
@@ -63,18 +64,7 @@ function Table({ countries = [] }) {
 }
 
 Table.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    code: string,
-    date: string,
-    flag: string,
-    location: string,
-    peopleFullyVaccinated: string,
-    peopleFullyVaccinatedPerHundred: string,
-    peopleVaccinated: string,
-    peopleVaccinatedPerHundred: string,
-    population: string,
-    totalVaccinations: string,
-  })).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape(ObjectValidateCountry)).isRequired,
 };
 
 export default Table;
