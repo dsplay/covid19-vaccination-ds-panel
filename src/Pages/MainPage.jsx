@@ -34,8 +34,30 @@ function MainPage({ selectedCountry = {}, countries = [] }) {
 }
 
 MainPage.propTypes = {
-  countries: PropTypes.objectOf(Array).isRequired,
-  selectedCountry: PropTypes.objectOf(Array).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.string,
+    date: PropTypes.string,
+    flag: PropTypes.string,
+    location: PropTypes.string,
+    peopleFullyVaccinated: PropTypes.string,
+    peopleFullyVaccinatedPerHundred: PropTypes.string,
+    peopleVaccinated: PropTypes.string,
+    peopleVaccinatedPerHundred: PropTypes.string,
+    population: PropTypes.string,
+    totalVaccinations: PropTypes.string,
+  })).isRequired,
+  selectedCountry: PropTypes.shape({
+    code: PropTypes.string,
+    date: PropTypes.string,
+    flag: PropTypes.string,
+    location: PropTypes.string,
+    peopleFullyVaccinated: PropTypes.string,
+    peopleFullyVaccinatedPerHundred: PropTypes.string,
+    peopleVaccinated: PropTypes.string,
+    peopleVaccinatedPerHundred: PropTypes.string,
+    population: PropTypes.string,
+    totalVaccinations: PropTypes.string,
+  }).isRequired,
 };
 
 export default MainPage;

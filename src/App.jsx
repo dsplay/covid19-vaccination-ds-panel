@@ -9,11 +9,11 @@ import MainPage from './Pages/MainPage';
 
 function getQuery() {
   const parsedUrl = new URL(window.location.href);
-  const mode = parsedUrl.searchParams.get('mode');
-  if (mode && mode === 'WORLDWIDE') {
+  const location = parsedUrl.searchParams.get('location');
+  if (location && location.toUpperCase() === 'WORLD') {
     return 'World';
-  } if (mode && name(mode)) {
-    return mode;
+  } if (location && name(location)) {
+    return location;
   }
   return null;
 }
