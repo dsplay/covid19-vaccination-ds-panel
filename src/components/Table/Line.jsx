@@ -5,7 +5,7 @@ import numberFormatter from '../../utils/NumberFormatter';
 
 function Line({ country }) {
   if (!country) {
-    return <tr />;
+    return <tr> &nbsp; </tr>;
   }
 
   const {
