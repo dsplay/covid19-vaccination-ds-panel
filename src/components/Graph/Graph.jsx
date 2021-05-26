@@ -55,6 +55,7 @@ function Graph({ className, country }) {
         data={data}
         options={{
           maintainAspectRatio: false,
+          responsive: true,
           interaction: {
             intersect: false,
           },
