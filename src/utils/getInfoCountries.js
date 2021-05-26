@@ -35,7 +35,6 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   const selectedCountryVaccinationRecord = [];
   const WorldVaccinationRecord = [];
 
-  console.time();
   countriesInfoJSON.forEach(({
     location,
     date,
@@ -97,7 +96,6 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
     selectedCountry.people_vaccinated_report = WorldVaccinationRecord.reverse();
     countries.delete(countriesMap.World);
   }
-  console.timeEnd();
 
   return { countries: orderCountries([...countries].map(([_, value]) => value)), selectedCountry };
 }
