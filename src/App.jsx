@@ -10,10 +10,11 @@ import MainPage from './Pages/MainPage';
 function getQuery() {
   const parsedUrl = new URL(window.location.href);
   const location = parsedUrl.searchParams.get('location');
-  if (location && location.toUpperCase() === 'WORLD') {
-    return 'World';
-  } if (location && name(location)) {
+  if (location && name(location)) {
     return location;
+  }
+  if (location) {
+    return 'World';
   }
   return null;
 }

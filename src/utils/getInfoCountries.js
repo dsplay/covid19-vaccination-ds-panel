@@ -33,7 +33,9 @@ function orderCountries(countries) {
 function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   const countries = new Map();
   const selectedCountryVaccinationRecord = [];
+  const WorldVaccinationRecord = [];
 
+  console.time();
   countriesInfoJSON.forEach(({
     location,
     date,
@@ -68,8 +70,16 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
       });
     }
 
-    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && codeCountry === codeSelectedCountry) {
+    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && (codeCountry === codeSelectedCountry)) {
       selectedCountryVaccinationRecord.push({
+        date,
+        peopleVaccinated,
+        peopleFullyVaccinated,
+      });
+    }
+
+    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && (codeCountry === countriesMap.World)) {
+      WorldVaccinationRecord.push({
         date,
         peopleVaccinated,
         peopleFullyVaccinated,
@@ -77,10 +87,17 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
     }
   });
 
-  const selectedCountry = countries.get(codeSelectedCountry);
-  if (!selectedCountry) return { countries: [], selectedCountry: {} };
-  selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord.reverse();
-  countries.delete(codeSelectedCountry);
+  let selectedCountry;
+  if (countries.has(codeSelectedCountry)) {
+    selectedCountry = countries.get(codeSelectedCountry);
+    selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord.reverse();
+    countries.delete(codeSelectedCountry);
+  } else {
+    selectedCountry = countries.get(countriesMap.World);
+    selectedCountry.people_vaccinated_report = WorldVaccinationRecord.reverse();
+    countries.delete(countriesMap.World);
+  }
+  console.timeEnd();
 
   return { countries: orderCountries([...countries].map(([_, value]) => value)), selectedCountry };
 }
