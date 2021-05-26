@@ -77,7 +77,7 @@ function Graph({ className, country }) {
               distribution: 'series',
               ticks: {
                 autoSkip: true,
-                padding: 2,
+                margin: 10,
                 maxRotation: 0,
                 minRotation: 0,
               },

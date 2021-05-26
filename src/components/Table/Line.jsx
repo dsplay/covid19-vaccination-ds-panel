@@ -9,12 +9,12 @@ function Line({ country }) {
   }
 
   const {
-    flag,
-    location,
+    flag = '',
+    location = '',
     population,
     totalVaccinations,
-    peopleVaccinatedPerHundred,
-    peopleFullyVaccinatedPerHundred,
+    peopleVaccinatedPerHundred = '-',
+    peopleFullyVaccinatedPerHundred = '-',
   } = country;
 
   return (
@@ -23,10 +23,10 @@ function Line({ country }) {
         { `${flag} ${location}` }
       </td>
       <td>
-        { numberFormatter(population)}
+        { numberFormatter(population) || '-'}
       </td>
       <td>
-        { numberFormatter(totalVaccinations) }
+        { numberFormatter(totalVaccinations) || '-' }
       </td>
       <td>
         { `${peopleVaccinatedPerHundred}%` }

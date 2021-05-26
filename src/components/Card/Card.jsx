@@ -12,13 +12,23 @@ function Card({ title, value, detail }) {
   return (
     <div className="card">
       <h3 className="card-title">{ t(title) }</h3>
-      <CountUp
-        className="card-value"
-        start={0}
-        end={Number(value)}
-        duration={2}
-        formattingFn={NumberFormatter}
-      />
+      {
+        value
+          ? (
+            <CountUp
+              className="card-value"
+              start={0}
+              end={Number(value)}
+              duration={2}
+              formattingFn={NumberFormatter}
+            />
+          )
+          : (
+            <div className="card-value">
+              -
+            </div>
+          )
+      }
       <h5 className="card-detail">
         { detail ? `(${Number(detail).toFixed(1)}%)` : '' }
       </h5>
