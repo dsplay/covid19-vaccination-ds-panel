@@ -78,6 +78,7 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   });
 
   const selectedCountry = countries.get(codeSelectedCountry);
+  if (!selectedCountry) return { countries: [], selectedCountry: {} };
   selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord.reverse();
   countries.delete(codeSelectedCountry);
 
