@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
+import 'chartjs-adapter-date-fns';
 
 import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
 import numberFormatter from '../../utils/NumberFormatter';
@@ -11,7 +12,7 @@ function Graph({ className, country }) {
 
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord
-    .map((record) => new Date(record.date).toLocaleDateString());
+    .map((record) => new Date(record.date));
 
   const peopleVaccinated = countryVaccinationRecord.map((record) => record.peopleVaccinated);
 
@@ -74,12 +75,27 @@ function Graph({ className, country }) {
 
           scales: {
             x: {
-              distribution: 'series',
+              scaleLabel: {
+                display: true,
+                labelString: 'Date',
+              },
+              type: 'time',
+              time: {
+                parser: 'YYYY-MM-DD HH:mm:ss',
+                unit: 'month',
+                displayFormats: {
+                  month: 'MMM',
+                },
+              },
               ticks: {
                 autoSkip: true,
                 margin: 10,
                 maxRotation: 0,
                 minRotation: 0,
+                fontSize: 20,
+                callback(value) {
+                  return t(value);
+                },
               },
             },
             y: {
