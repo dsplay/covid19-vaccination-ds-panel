@@ -10,8 +10,11 @@ function Graph({ className, country }) {
   const { t } = useTranslation();
 
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
-  const dates = countryVaccinationRecord.map((record) => record.date);
+  const dates = countryVaccinationRecord
+    .map((record) => new Date(record.date).toLocaleDateString());
+
   const peopleVaccinated = countryVaccinationRecord.map((record) => record.peopleVaccinated);
+
   const peopleFullyVaccinated = countryVaccinationRecord
     .map((record) => record.peopleFullyVaccinated);
 
@@ -74,7 +77,7 @@ function Graph({ className, country }) {
               distribution: 'series',
               ticks: {
                 autoSkip: true,
-                maxTicksLimit: 6,
+                padding: 2,
                 maxRotation: 0,
                 minRotation: 0,
               },
