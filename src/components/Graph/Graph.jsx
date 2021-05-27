@@ -69,7 +69,8 @@ function Graph({ className, country }) {
               text: t('vaccination over the time'),
             },
             legend: {
-              display: false,
+              display: true,
+              position: 'chartArea',
             },
           },
 
