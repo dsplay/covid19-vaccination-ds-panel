@@ -47,7 +47,7 @@ function Table({ countries = [] }) {
       <table>
         <thead>
           <tr>
-            <th>{t('Country')}</th>
+            <th>Location</th>
             <th>{t('Population')}</th>
             <th>{t('Doses Given')}</th>
             <th>{t('% at least 1 dose')}</th>
