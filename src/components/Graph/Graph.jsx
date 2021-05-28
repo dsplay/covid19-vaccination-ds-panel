@@ -25,7 +25,7 @@ function Graph({ className, country }) {
     fill: false,
     datasets: [
       {
-        label: 'people fully vaccinated',
+        label: t('people fully vaccinated'),
         fill: true,
         data: peopleFullyVaccinated,
         borderColor: 'rgba(13, 115, 13, 1)',
@@ -37,7 +37,7 @@ function Graph({ className, country }) {
         },
       },
       {
-        label: 'people vaccinated',
+        label: t('people with at least 1 dose'),
         fill: true,
         data: peopleVaccinated,
         borderColor: 'rgba( 124, 252, 0, 1 )',
