@@ -10,7 +10,7 @@ import numberFormatter from '../../utils/NumberFormatter';
 function Graph({ className, country }) {
   const { t } = useTranslation();
 
-  const legendSize = Number(document.querySelector('html').style.fontSize.toString().replace('px', '')) * 1.3;
+  const fontSize = Number(document.querySelector('html').style.fontSize.toString().replace('px', ''));
 
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord
@@ -75,7 +75,7 @@ function Graph({ className, country }) {
               position: 'chartArea',
               labels: {
                 font: {
-                  size: legendSize,
+                  size: (fontSize * 1.3),
                 },
               },
             },
@@ -100,7 +100,10 @@ function Graph({ className, country }) {
                 margin: 10,
                 maxRotation: 0,
                 minRotation: 0,
-                fontSize: 20,
+                font: {
+                  size: fontSize,
+                  weight: 800,
+                },
                 callback(value) {
                   return t(value);
                 },
@@ -108,6 +111,10 @@ function Graph({ className, country }) {
             },
             y: {
               ticks: {
+                font: {
+                  size: fontSize,
+                  weight: 800,
+                },
                 callback(value) {
                   if (value === 0) return 0;
                   return numberFormatter(value);
