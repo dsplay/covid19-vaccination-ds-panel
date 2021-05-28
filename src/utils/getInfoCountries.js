@@ -127,11 +127,12 @@ function dataLocalStorageIsValid(codeSelectedCountry) {
 
   const version = localStorage.getItem(KEY_VERSION);
   if (version !== VERSION) return false;
+
   return true;
 }
 
 export default async function getInfoCountries(codeSelectedCountry) {
-  if (dataLocalStorageIsValid()) {
+  if (dataLocalStorageIsValid(codeSelectedCountry)) {
     return getDataLocalStorage();
   }
 
