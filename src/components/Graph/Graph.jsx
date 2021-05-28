@@ -10,6 +10,8 @@ import numberFormatter from '../../utils/NumberFormatter';
 function Graph({ className, country }) {
   const { t } = useTranslation();
 
+  const legendSize = Number(document.querySelector('html').style.fontSize.toString().replace('px', '')) * 1.3;
+
   const countryVaccinationRecord = (country) ? country.people_vaccinated_report : [];
   const dates = countryVaccinationRecord
     .map((record) => new Date(record.date));
@@ -71,6 +73,11 @@ function Graph({ className, country }) {
             legend: {
               display: true,
               position: 'chartArea',
+              labels: {
+                font: {
+                  size: legendSize,
+                },
+              },
             },
           },
 
