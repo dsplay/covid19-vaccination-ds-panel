@@ -6,6 +6,7 @@ function Foot({ date }) {
   return (
     <div className="wrapper-footer align-text-center">
       powered by
+      {' '}
       <strong>
         <a href="https://dsplay.tv">
           dsplay.tv
