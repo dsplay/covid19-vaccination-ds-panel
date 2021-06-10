@@ -12,9 +12,11 @@ function Table({ countries = [] }) {
   const { t } = useTranslation();
 
   const worldInfoIndex = countries.findIndex((country) => country.code === 'World');
+  const worldInfoExist = worldInfoIndex >= 0;
 
-  const ELEMENTS_BY_PAGE = (worldInfoIndex < 0) ? 3 : 2;
-  const NUMBER_OF_PAGES = Math.ceil(countries.length / ELEMENTS_BY_PAGE);
+  const ELEMENTS_BY_PAGE = (worldInfoExist) ? 4 : 5;
+  const NUMBER_OF_PAGES = Math.trunc((countries.length - (worldInfoExist ? 1 : 0))
+  / ELEMENTS_BY_PAGE);
 
   const [currentPage, setCurrentPage] = useState(0);
 

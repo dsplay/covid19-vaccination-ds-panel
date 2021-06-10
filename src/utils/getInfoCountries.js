@@ -11,7 +11,7 @@ const KEY_VERSION = 'version';
 const KEY_LOCATION = 'location';
 const VERSION = '1.5';
 
-const COUNTRIES_LIMIT = 18;
+const COUNTRIES_LIMIT = 20;
 
 const countriesMap = {
   World: 'World',
