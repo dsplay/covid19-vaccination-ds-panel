@@ -49,3 +49,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Build status
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1d98aafa-b024-4398-8a37-0525521c069e/deploy-status)](https://app.netlify.com/sites/dsplay-covid19-vac/deploys)
