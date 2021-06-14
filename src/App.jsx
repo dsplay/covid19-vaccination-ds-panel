@@ -24,15 +24,16 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(async () => {
-    const selectedMode = getQuery();
+    const queryCountry = getQuery();
     const countryCode = await getLocationUser();
     let selectedCountryCode;
-    if (!selectedMode && countryCode) {
+    if (!queryCountry && countryCode) {
       selectedCountryCode = countryCode;
     } else {
-      selectedCountryCode = selectedMode;
+      selectedCountryCode = queryCountry;
     }
-    const response = await getInfoCountries(selectedCountryCode);
+
+    const response = await getInfoCountries(selectedCountryCode.toUpperCase());
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
 
