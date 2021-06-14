@@ -7,9 +7,14 @@ import getLocationUser from './utils/getUserCountry';
 
 import MainPage from './Pages/MainPage';
 
-function getQuery() {
+function getQuery(field) {
   const parsedUrl = new URL(window.location.href);
-  const location = parsedUrl.searchParams.get('location');
+  const value = parsedUrl.searchParams.get(field);
+  return value;
+}
+
+function getQueryLocation() {
+  const location = getQuery('location');
   if (location && name(location)) {
     return location;
   }
@@ -19,12 +24,20 @@ function getQuery() {
   return null;
 }
 
+function getQueryDuration() {
+  const duration = getQuery('duration');
+  return (Number.isInteger(parseInt(duration, 10))) ? duration : null;
+}
+
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [duration, setDuration] = useState(5);
 
   useEffect(async () => {
-    const queryCountry = getQuery();
+    const queryCountry = getQueryLocation();
+    const queryDuration = getQueryDuration();
+    console.log(getQueryDuration());
     const countryCode = await getLocationUser();
     let selectedCountryCode;
     if (!queryCountry && countryCode) {
@@ -39,13 +52,14 @@ function App() {
 
     setSelectedCountry(countrySelectedFiltered);
     setCountries(countriesFiltered);
+    if (queryDuration) setDuration(queryDuration);
   }, []);
 
   if (countries.length > 1) {
     return (
       <div className="App">
         <I18nextProvider i18n={i18n}>
-          <MainPage countries={countries} selectedCountry={selectedCountry} />
+          <MainPage countries={countries} selectedCountry={selectedCountry} duration={duration} />
         </I18nextProvider>
       </div>
     );
