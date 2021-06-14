@@ -5,14 +5,17 @@ import moment from 'moment';
 function Foot({ date }) {
   return (
     <div className="wrapper-footer align-text-center">
-      powered by
-      {' '}
+      {'powered by '}
       <strong>
         <a href="https://dsplay.tv">
           dsplay.tv
         </a>
       </strong>
-      {` | From Our World in Data - Last Updated: ${moment(date).fromNow()}`}
+      {' | '}
+      <a href="https://ourworldindata.org/covid-vaccinations">
+        From Our World in Data
+      </a>
+      {` - Last Updated: ${moment(date).fromNow()}`}
     </div>
   );
 }
