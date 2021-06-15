@@ -25,19 +25,18 @@ function getQueryLocation() {
 }
 
 function getQueryDuration() {
-  const duration = getQuery('duration');
-  return (Number.isInteger(parseInt(duration, 10))) ? duration : null;
+  const pageDuration = getQuery('pageDuration');
+  return (Number.isInteger(parseInt(pageDuration, 10))) ? pageDuration : null;
 }
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [duration, setDuration] = useState(5);
+  const [pageDuration, setpageDuration] = useState(5);
 
   useEffect(async () => {
     const queryCountry = getQueryLocation();
     const queryDuration = getQueryDuration();
-    console.log(getQueryDuration());
     const countryCode = await getLocationUser();
     let selectedCountryCode;
     if (!queryCountry && countryCode) {
@@ -52,14 +51,18 @@ function App() {
 
     setSelectedCountry(countrySelectedFiltered);
     setCountries(countriesFiltered);
-    if (queryDuration) setDuration(queryDuration);
+    if (queryDuration) setpageDuration(queryDuration);
   }, []);
 
   if (countries.length > 1) {
     return (
       <div className="App">
         <I18nextProvider i18n={i18n}>
-          <MainPage countries={countries} selectedCountry={selectedCountry} duration={duration} />
+          <MainPage
+            countries={countries}
+            selectedCountry={selectedCountry}
+            pageDuration={pageDuration}
+          />
         </I18nextProvider>
       </div>
     );

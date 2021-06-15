@@ -17,7 +17,7 @@ import Footer from '../components/Footer/Footer';
 
 import './MainPage.sass';
 
-function MainPage({ selectedCountry = {}, countries = [], duration }) {
+function MainPage({ selectedCountry = {}, countries = [], pageDuration }) {
   const { t } = useTranslation();
 
   return (
@@ -37,7 +37,7 @@ function MainPage({ selectedCountry = {}, countries = [], duration }) {
       <div className="h-20 flex elements-in-row">
         <Table
           countries={translateManyNameCountries(i18n.language, countries)}
-          duration={duration}
+          duration={pageDuration}
         />
         <QRCode className="qr-code" value={`https://news.google.com/covid19/map?hl=${i18n.language}`} />
         <Footer className date={selectedCountry.date} />
@@ -49,7 +49,7 @@ function MainPage({ selectedCountry = {}, countries = [], duration }) {
 MainPage.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape(ObjectValidateCountry)).isRequired,
   selectedCountry: PropTypes.shape(ObjectValidateCountry).isRequired,
-  duration: PropTypes.number.isRequired,
+  pageDuration: PropTypes.number.isRequired,
 };
 
 export default MainPage;
