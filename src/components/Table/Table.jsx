@@ -8,7 +8,7 @@ import useInterval from '../../utils/useInterval';
 
 import './Table.sass';
 
-function Table({ countries = [] }) {
+function Table({ countries = [], duration }) {
   const { t } = useTranslation();
 
   const worldInfoIndex = countries.findIndex((country) => country.code === 'World');
@@ -22,7 +22,7 @@ function Table({ countries = [] }) {
 
   useInterval(() => {
     setCurrentPage((currentPage + 1) % NUMBER_OF_PAGES);
-  }, countries.length > 1 ? 10000 : null);
+  }, countries.length > 1 ? (duration * 1000) : null);
 
   let lineWorld;
   const countriesInfo = [...countries];
@@ -67,6 +67,7 @@ function Table({ countries = [] }) {
 
 Table.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape(ObjectValidateCountry)).isRequired,
+  duration: PropTypes.number.isRequired,
 };
 
 export default Table;

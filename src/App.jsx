@@ -7,9 +7,14 @@ import getLocationUser from './utils/getUserCountry';
 
 import MainPage from './Pages/MainPage';
 
-function getQuery() {
+function getQuery(field) {
   const parsedUrl = new URL(window.location.href);
-  const location = parsedUrl.searchParams.get('location');
+  const value = parsedUrl.searchParams.get(field);
+  return value;
+}
+
+function getQueryLocation() {
+  const location = getQuery('location');
   if (location && name(location)) {
     return location;
   }
@@ -19,32 +24,45 @@ function getQuery() {
   return null;
 }
 
+function getQueryDuration() {
+  const pageDuration = getQuery('pageDuration');
+  return (Number.isInteger(parseInt(pageDuration, 10))) ? pageDuration : null;
+}
+
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [pageDuration, setpageDuration] = useState(5);
 
   useEffect(async () => {
-    const selectedMode = getQuery();
+    const queryCountry = getQueryLocation();
+    const queryDuration = getQueryDuration();
     const countryCode = await getLocationUser();
     let selectedCountryCode;
-    if (!selectedMode && countryCode) {
+    if (!queryCountry && countryCode) {
       selectedCountryCode = countryCode;
     } else {
-      selectedCountryCode = selectedMode;
+      selectedCountryCode = queryCountry;
     }
-    const response = await getInfoCountries(selectedCountryCode);
+
+    const response = await getInfoCountries(selectedCountryCode.toUpperCase());
     const countriesFiltered = response.countries;
     const countrySelectedFiltered = response.selectedCountry;
 
     setSelectedCountry(countrySelectedFiltered);
     setCountries(countriesFiltered);
+    if (queryDuration) setpageDuration(queryDuration);
   }, []);
 
   if (countries.length > 1) {
     return (
       <div className="App">
         <I18nextProvider i18n={i18n}>
-          <MainPage countries={countries} selectedCountry={selectedCountry} />
+          <MainPage
+            countries={countries}
+            selectedCountry={selectedCountry}
+            pageDuration={pageDuration}
+          />
         </I18nextProvider>
       </div>
     );
