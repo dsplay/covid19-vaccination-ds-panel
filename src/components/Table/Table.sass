@@ -1,5 +1,5 @@
 table
-  font-size: 1.3rem
+  font-size: 1.2rem
   align-self: flex-start;
   @media(orientation: landscape)
     width: 80%
@@ -9,15 +9,39 @@ table
     height: 50%
 
 td 
-  text-align: center
+  text-align: right
+  padding-right: 1rem
 
+  &.value
+    width: 15%
+
+  &.pct
+    // background-color: #333
+
+    // text-shadow: 0 0 1px black
+    span.status
+      display: inline-block
+      min-width: 1rem
+      min-height: 1rem
+      margin-left: 1rem
 th
   padding: 0 1rem
+  font-size: 1rem
+  font-weight: normal
+  color: #777
+
+  &.number
+    text-align: right
 
 tr
   td:first-child 
     text-align: left
     padding-left: 0.5rem
+
+  &.even
+    background-color: rgba(255, 255, 255, .2)
+  &.odd
+    background-color: rgba(20 , 155, 255, .2)
 
 tr
   th:first-child

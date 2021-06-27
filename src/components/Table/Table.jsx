@@ -16,7 +16,7 @@ function Table({ countries = [], duration }) {
 
   const ELEMENTS_BY_PAGE = (worldInfoExist) ? 4 : 5;
   const NUMBER_OF_PAGES = Math.trunc((countries.length - (worldInfoExist ? 1 : 0))
-  / ELEMENTS_BY_PAGE);
+    / ELEMENTS_BY_PAGE);
 
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -28,7 +28,7 @@ function Table({ countries = [], duration }) {
   const countriesInfo = [...countries];
 
   if (!(worldInfoIndex < 0)) {
-    lineWorld = <Line key="World" country={countries[worldInfoIndex]} />;
+    lineWorld = <Line key="World" className="odd" country={countries[worldInfoIndex]} />;
     countriesInfo.splice(worldInfoIndex, 1);
   }
 
@@ -38,6 +38,7 @@ function Table({ countries = [], duration }) {
     position = (currentPage * ELEMENTS_BY_PAGE) + i;
     lines.push(<Line
       key={i}
+      className={i % 2 === 0 ? 'even' : 'odd'}
       country={(position < countriesInfo.length)
         ? countriesInfo[position]
         : null}
@@ -50,15 +51,15 @@ function Table({ countries = [], duration }) {
         <thead>
           <tr>
             <th>{t('Location')}</th>
-            <th>{t('Population')}</th>
-            <th>{t('Doses Given')}</th>
-            <th>{t('% at least 1 dose')}</th>
-            <th>{t('% fully vaccinated')}</th>
+            <th className="number">{t('Population')}</th>
+            <th className="number">{t('Doses Given')}</th>
+            <th className="number">{t('% at least 1 dose')}</th>
+            <th className="number" h>{t('% fully vaccinated')}</th>
           </tr>
         </thead>
         <tbody>
-          { lineWorld }
-          { lines }
+          {lineWorld}
+          {lines}
         </tbody>
       </table>
     </>

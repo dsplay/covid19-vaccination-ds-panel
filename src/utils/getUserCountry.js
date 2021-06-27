@@ -8,7 +8,7 @@ export default async function getUserCountry() {
     if (dataLocalStorageIsValid()) {
       return locationCode;
     }
-    const response = await axios.get('http://www.geoplugin.net/json.gp');
+    const response = await axios.get('https://manager.dsplay.tv/service/getMyIpInfo');
     localStorage.setItem(KEY_LOCATION, response.data.geoplugin_countryCode);
     return response.data.geoplugin_countryCode;
   } catch (error) {

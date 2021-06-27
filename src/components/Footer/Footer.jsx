@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import './styles.sass';
 
 function Foot({ date }) {
   return (
-    <div className="wrapper-footer align-text-center">
+    <div className="wrapper-footer footer align-text-center">
       {'powered by '}
       <strong>
         <a href="https://dsplay.tv">
