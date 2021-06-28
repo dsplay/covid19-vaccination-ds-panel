@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Table.sass';
 
-import numberFormatter from '../../utils/NumberFormatter';
-import { getColorFromPct } from '../../utils/color';
+import numberFormatter from '../../../utils/NumberFormatter';
+import { getColorFromPct } from '../../../utils/color';
 
 function Line({
   country,

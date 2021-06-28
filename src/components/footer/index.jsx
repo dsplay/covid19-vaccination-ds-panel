@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import './styles.sass';
+import './style.sass';
 
 function Foot({ date }) {
   return (

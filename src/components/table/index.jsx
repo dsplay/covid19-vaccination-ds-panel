@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import Line from './Line';
+import Line from './line';
 import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
 import useInterval from '../../utils/useInterval';
 
-import './Table.sass';
+import './style.sass';
 
 function Table({ countries = [], duration }) {
   const { t } = useTranslation();

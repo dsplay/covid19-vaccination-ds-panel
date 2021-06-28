@@ -5,7 +5,7 @@ import i18n from './i18n';
 import getInfoCountries from './utils/getInfoCountries';
 import getLocationUser from './utils/getUserCountry';
 
-import MainPage from './Pages/MainPage';
+import MainPage from './pages/main-page';
 
 function getQuery(field) {
   const parsedUrl = new URL(window.location.href);

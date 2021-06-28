@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
 
 import translateCountryName from '../../utils/countriesNameTranslate';
-import Card from '../Card/Card';
+import Card from '../card';
 
-import './CardList.sass';
+import './style.sass';
 
 function CardList({ className, country }) {
   const { t } = useTranslation();
