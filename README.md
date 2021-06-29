@@ -30,7 +30,7 @@ If you want to show data from Portugal, for example, use the following URL:
 https://covid19-vac.dsplay.tv?location=pt
 ```
 
-You can get the available locations [here](<link to abailable locations>)
+You can get the available locations [here](locations.md)
 
 ### Specifying the page duration for the table
 
