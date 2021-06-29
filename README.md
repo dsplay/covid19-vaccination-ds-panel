@@ -32,13 +32,34 @@ https://covid19-vac.dsplay.tv?location=pt
 
 You can get the available locations [here](locations.md)
 
+### Specifying the language
+
+By default the language is set by your locale, if your language is not supported we will use English.
+
+You are able to force the language to be shown in the main area by passing the `lng` parameter on the query string. Available languages and code to use in parameter are: 
+- portuguese - pt,
+- italian - it,
+- dutch - nl,
+- french - fr, 
+- spanish - es,
+- german - de,
+
+Default language is english but 
+
+If you want to show data from Portugal, for example, use the following URL:
+```
+https://covid19-vac.dsplay.tv?location=pt
+```
+
+You can get the available locations [here](locations.md)
+
 ### Specifying the page duration for the table
 
-You can modify the page duration (default is 5s) for the complementary table by using the `pageDuration` query string parameter.
+You can modify the page duration (default is 12s) for the complementary table by using the `pageDuration` query string parameter.
 
-If you want to show data from Germany with a 10s page duration, for example, use the following URL:
+If you want to show data from Germany with a 15s page duration, for example, use the following URL:
 ```
-https://covid19-vac.dsplay.tv?location=de&pageDuration=10
+https://covid19-vac.dsplay.tv?location=de&pageDuration=15
 ```
 
 ## References

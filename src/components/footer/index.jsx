@@ -1,22 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n';
+import 'moment/locale/de';
+import 'moment/locale/it';
+import 'moment/locale/fr';
+import 'moment/locale/nl';
+import 'moment/locale/es';
+import 'moment/locale/pt';
+
 import './style.sass';
 
 function Foot({ date }) {
+  const { t } = useTranslation();
+  moment.locale(i18n.language);
+
   return (
     <div className="wrapper-footer footer align-text-center">
-      {'powered by '}
+      {t('powered by')}
       <strong>
         <a href="https://dsplay.tv">
-          dsplay.tv
+          {' dsplay.tv'}
         </a>
       </strong>
       {' | '}
       <a href="https://ourworldindata.org/covid-vaccinations">
         From Our World in Data
       </a>
-      {` - Last Updated: ${moment(date).fromNow()}`}
+      {` - ${t('Last Updated')}: ${moment(date).fromNow()}`}
     </div>
   );
 }
