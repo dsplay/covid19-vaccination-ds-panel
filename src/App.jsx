@@ -32,7 +32,7 @@ function getQueryDuration() {
 function App() {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [pageDuration, setpageDuration] = useState(5);
+  const [pageDuration, setpageDuration] = useState(12);
 
   useEffect(async () => {
     const queryCountry = getQueryLocation();

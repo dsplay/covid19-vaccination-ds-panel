@@ -4,6 +4,7 @@ These are available locations and your codes to use in parameter `location`.
 
 | Location |  Code |
 |---|---|
+World | World |
 Afghanistan | AF |
 Albania | AL |
 Algeria | DZ |
@@ -40,6 +41,7 @@ Cape Verde | CV |
 Cayman Islands | KY |
 Central African Republic | CF |
 Chile | CL |
+China | CN |
 Colombia | CO |
 Comoros | KM |
 Cook Islands | CK |
@@ -199,7 +201,21 @@ Vanuatu | VU |
 Venezuela | VE |
 Vietnam | VN |
 Wallis and Futuna | WF |
-World | World |
 Yemen | YE |
 Zambia | ZM |
 Zimbabwe | ZW |
+
+
+
+location:         China,
+iso_code:         CHN,
+date:         2021-06-28,
+total_vaccinations:         1206714000,
+people_vaccinated:         ,
+people_fully_vaccinated:         ,
+daily_vaccinations_raw:         20927000,
+daily_vaccinations:         22424286,
+total_vaccinations_per_hundred:         83.84,
+people_vaccinated_per_hundred:         ,
+people_fully_vaccinated_per_hundred:         ,
+daily_vaccinations_per_million:         15580
