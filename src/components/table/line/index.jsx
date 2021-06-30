@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import numberFormatter from '../../../utils/NumberFormatter';
+import { formatBigValue } from '../../../utils/number';
 import { getColorFromPct } from '../../../utils/color';
 
 function Line({
@@ -27,10 +27,10 @@ function Line({
         {`${flag} ${location}`}
       </td>
       <td className="value">
-        {numberFormatter(population) || '-'}
+        {formatBigValue(population) || '-'}
       </td>
       <td className="value">
-        {numberFormatter(totalVaccinations) || '-'}
+        {formatBigValue(totalVaccinations) || '-'}
       </td>
       <td className="value pct">
         {`${Number(peopleVaccinatedPerHundred).toFixed(0)}%`}

@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
 
-import translateCountryName from '../../utils/countriesNameTranslate';
+import getTranslatedCountryName from '../../utils/country-name-translator';
 import Card from '../card';
 
 import './style.sass';
@@ -15,7 +15,7 @@ function CardList({ className, country }) {
     <div className={`cards-wrapper ${className}`}>
       <div className="w-100">
         <h1 className="title-card-list">
-          { `${country.flag}   ${translateCountryName(i18n.language, country.code) || t(country.location)}` }
+          { `${country.flag}   ${getTranslatedCountryName(i18n.language, country.code) || t(country.location)}` }
         </h1>
       </div>
       <Card key={1} title="Population" value={(country) ? country.population : 0} />

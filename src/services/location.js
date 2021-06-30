@@ -1,8 +1,9 @@
+/* eslint-disable  import/prefer-default-export */
 import axios from 'axios';
 
-import { KEY_LOCATION, dataLocalStorageIsValid } from './getInfoCountries';
+import { KEY_LOCATION, dataLocalStorageIsValid } from './vaccination-data';
 
-export default async function getUserCountry() {
+export async function detectUserLocation() {
   try {
     const locationCode = localStorage.getItem(KEY_LOCATION);
     if (dataLocalStorageIsValid()) {

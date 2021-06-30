@@ -1,7 +1,3 @@
-* 
-  margin: 0
-  padding: 0
-  box-sizing: border-box
 
 
 $color-text-base: #2f2f33
@@ -13,12 +9,38 @@ $text-secondary-color: #757680
   margin: 0 
   padding: 0
 
-h1
-  font-size: 3rem
+
+.wrapper
+  height: 100%
+  width: 100%
+
+.wrapper:before
+  content: ' '
+  display: block
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  opacity: 0.1
+  background-image: url(https://www.biospace.com/getasset/ff893178-9ffa-4b80-943e-1d8eb6e3a783/)
+  background-repeat: no-repeat
+  background-position: 50% 0
+  background-size: cover
+
+.main-page
+  height: 100%
+  width: 100%
+  position: relative
+
+
+  .logo
+    height: 5rem
+    margin-left: 1rem
 
 .flex 
   display: flex
-  flex-wrap: wrap;
+  flex-wrap: wrap
 
 
 .elements-in-row  
@@ -60,10 +82,10 @@ h1
   @media(orientation: landscape)
     height: 60%
   @media(orientation: portrait)
-    height: 70%
+    height: 67%
 
 .wrapper-footer
-  align-self: flex-end;
+  align-self: flex-end
   @media(orientation: landscape)
     width: 100%
   @media(orientation: portrait)
@@ -80,14 +102,8 @@ h1
   width: 100%
 
 
-body,
-input,
-button,
-textarea 
-  font: 500 1rem Poppins
-  color: $color-text-base
-
 .qr-code
+  border: 1rem solid white
   width: auto !important
   @media(orientation: landscape)
     height: 100% !important

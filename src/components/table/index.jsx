@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Line from './line';
-import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
-import useInterval from '../../utils/useInterval';
+import LocationSchema from '../../schemas/location';
+import useInterval from '../../hooks/use-interval';
 
 import './style.sass';
 
@@ -28,7 +28,7 @@ function Table({ countries = [], duration }) {
   const countriesInfo = [...countries];
 
   if (!(worldInfoIndex < 0)) {
-    lineWorld = <Line key="World" className="odd" country={countries[worldInfoIndex]} />;
+    lineWorld = <Line key="World" className="world" country={countries[worldInfoIndex]} />;
     countriesInfo.splice(worldInfoIndex, 1);
   }
 
@@ -67,7 +67,7 @@ function Table({ countries = [], duration }) {
 }
 
 Table.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape(ObjectValidateCountry)).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape(LocationSchema)).isRequired,
   duration: PropTypes.number.isRequired,
 };
 

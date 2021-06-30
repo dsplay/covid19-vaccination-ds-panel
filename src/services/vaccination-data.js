@@ -17,25 +17,25 @@ const countriesMap = {
   World: 'World',
 };
 
-const forbiddenCode = ['EU'];
+const forbiddenCodes = ['EU'];
 
-async function downloadInfoCountries() {
+async function fetchVaccinationData() {
   const response = await axios.get('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv');
   return CSVtoJSON(response.data, { header: true }).data;
 }
 
-function orderCountries(countries) {
+function sortCountries(countries) {
   return countries.sort(
     (countryA, countryB) => countryB.totalVaccinations - countryA.totalVaccinations,
   ).slice(0, COUNTRIES_LIMIT);
 }
 
-function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
+function filterVaccinationData(vaccinationData, selectedCountryCode) {
   const countries = new Map();
   const selectedCountryVaccinationRecord = [];
-  const WorldVaccinationRecord = [];
+  const worldVaccinationRecord = [];
 
-  countriesInfoJSON.forEach(({
+  vaccinationData.forEach(({
     location,
     date,
     total_vaccinations: totalVaccinations,
@@ -52,14 +52,14 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
       && peopleVaccinatedPerHundred.trim() !== ''
       && Number(peopleVaccinatedPerHundred) !== 0
       && codeCountry
-      && !forbiddenCode.includes(codeCountry)
+      && !forbiddenCodes.includes(codeCountry)
     ) {
       countries.set(codeCountry, {
         location,
         date,
         code: codeCountry,
         population: (Number(peopleVaccinated)
-        / (Number(peopleVaccinatedPerHundred) / 100)).toFixed(0),
+          / (Number(peopleVaccinatedPerHundred) / 100)).toFixed(0),
         flag: flag(location) || '🌐',
         peopleVaccinated,
         peopleFullyVaccinated,
@@ -69,7 +69,7 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
       });
     }
 
-    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && (codeCountry === codeSelectedCountry)) {
+    if (peopleVaccinated !== '0' && peopleVaccinated !== '' && (codeCountry === selectedCountryCode)) {
       selectedCountryVaccinationRecord.push({
         date,
         peopleVaccinated,
@@ -78,7 +78,7 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
     }
 
     if (peopleVaccinated !== '0' && peopleVaccinated !== '' && (codeCountry === countriesMap.World)) {
-      WorldVaccinationRecord.push({
+      worldVaccinationRecord.push({
         date,
         peopleVaccinated,
         peopleFullyVaccinated,
@@ -87,43 +87,46 @@ function filterInfoCountries(countriesInfoJSON, codeSelectedCountry) {
   });
 
   let selectedCountry;
-  if (countries.has(codeSelectedCountry)) {
-    selectedCountry = countries.get(codeSelectedCountry);
+  if (countries.has(selectedCountryCode)) {
+    selectedCountry = countries.get(selectedCountryCode);
     selectedCountry.people_vaccinated_report = selectedCountryVaccinationRecord.reverse();
-    countries.delete(codeSelectedCountry);
+    countries.delete(selectedCountryCode);
   } else {
     selectedCountry = countries.get(countriesMap.World);
-    selectedCountry.people_vaccinated_report = WorldVaccinationRecord.reverse();
+    selectedCountry.people_vaccinated_report = worldVaccinationRecord.reverse();
     countries.delete(countriesMap.World);
   }
 
-  return { countries: orderCountries([...countries].map(([_, value]) => value)), selectedCountry };
+  return {
+    countries: sortCountries([...countries].map(([_, value]) => value)),
+    selectedCountry,
+  };
 }
 
-function getDataLocalStorage() {
+function getLocalStorageData() {
   const cache = localStorage.getItem(KEY_DATA);
   const countriesInfoFiltered = cache && JSON.parse(decompressFromUTF16(cache));
   return countriesInfoFiltered;
 }
 
-function setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered) {
-  localStorage.setItem(KEY_DATA, compressToUTF16(JSON.stringify(countriesInfoFiltered)));
+function setLocalStorageData(selectedLocationCode, vaccinationData) {
+  localStorage.setItem(KEY_DATA, compressToUTF16(JSON.stringify(vaccinationData)));
   localStorage.setItem(KEY_UPDATED, moment().utc().toISOString());
-  localStorage.setItem(KEY_SELECTED, codeSelectedCountry);
+  localStorage.setItem(KEY_SELECTED, selectedLocationCode);
   localStorage.setItem(KEY_VERSION, VERSION);
 }
 
-function dataLocalStorageIsValid(codeSelectedCountry) {
+function isLocalStorageDataValid(selectedCountryCode) {
   const locationCode = localStorage.getItem(KEY_LOCATION);
   if (!locationCode) return false;
 
   const lastUpdate = localStorage.getItem(KEY_UPDATED);
   if (!lastUpdate) return false;
-  if (moment().diff(lastUpdate, 'days') > 1) return false;
+  if (moment().diff(lastUpdate, 'hours') > 12) return false;
 
   const previouscodeSelectedCountry = localStorage.getItem(KEY_SELECTED);
   if (!previouscodeSelectedCountry) return false;
-  if (previouscodeSelectedCountry !== codeSelectedCountry) return false;
+  if (previouscodeSelectedCountry !== selectedCountryCode) return false;
 
   const version = localStorage.getItem(KEY_VERSION);
   if (version !== VERSION) return false;
@@ -131,21 +134,23 @@ function dataLocalStorageIsValid(codeSelectedCountry) {
   return true;
 }
 
-export default async function getInfoCountries(codeSelectedCountry) {
-  if (dataLocalStorageIsValid(codeSelectedCountry)) {
-    return getDataLocalStorage();
+export default async function getVaccinationData(selectedCountryCode) {
+  // if (1 > 0) throw new Error('Boom');
+
+  if (isLocalStorageDataValid(selectedCountryCode)) {
+    return getLocalStorageData();
   }
 
-  const countriesInfoJSON = await downloadInfoCountries();
-  if (countriesInfoJSON) {
-    const countriesInfoFiltered = filterInfoCountries(
-      countriesInfoJSON.reverse(), codeSelectedCountry,
+  const vaccinationData = await fetchVaccinationData();
+  if (vaccinationData) {
+    const filteredVaccinationData = filterVaccinationData(
+      vaccinationData.reverse(), selectedCountryCode,
     );
-    setDataLocalStorage(codeSelectedCountry, countriesInfoFiltered);
-    return countriesInfoFiltered;
+    setLocalStorageData(selectedCountryCode, filteredVaccinationData);
+    return filteredVaccinationData;
   }
 
-  return getDataLocalStorage();
+  return getLocalStorageData();
 }
 
-export { dataLocalStorageIsValid, KEY_LOCATION };
+export { isLocalStorageDataValid as dataLocalStorageIsValid, KEY_LOCATION };

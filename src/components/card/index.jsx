@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import CountUp from 'react-countup';
 import { useTranslation } from 'react-i18next';
 
-import NumberFormatter from '../../utils/NumberFormatter';
+import { getColorFromPct } from '../../utils/color';
+import { formatBigValue } from '../../utils/number';
 import './style.sass';
 
 function Card({ title, value, detail }) {
@@ -11,7 +12,7 @@ function Card({ title, value, detail }) {
 
   return (
     <div className="card">
-      <h3 className="card-title">{ t(title) }</h3>
+      <h3 className="card-title">{t(title)}</h3>
       {
         value
           ? (
@@ -19,8 +20,8 @@ function Card({ title, value, detail }) {
               className="card-value"
               start={0}
               end={Number(value)}
-              duration={2}
-              formattingFn={NumberFormatter}
+              duration={3}
+              formattingFn={formatBigValue}
             />
           )
           : (
@@ -29,9 +30,19 @@ function Card({ title, value, detail }) {
             </div>
           )
       }
-      <h5 className="card-detail">
-        { detail ? `(${Number(detail).toFixed(1)}%)` : '' }
-      </h5>
+      {
+        detail && (
+          <h5
+            className="card-detail"
+            style={{
+              color: getColorFromPct(Number(detail / 100).toFixed(2), true),
+            }}
+          >
+            {Number(detail).toFixed(2)}
+            %
+          </h5>
+        )
+      }
     </div>
   );
 }

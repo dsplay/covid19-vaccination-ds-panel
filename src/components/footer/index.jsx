@@ -18,15 +18,13 @@ function Foot({ date }) {
 
   return (
     <div className="wrapper-footer footer align-text-center">
-      {t('powered by')}
+      {t('powered by ')}
       <strong>
-        <a href="https://dsplay.tv">
-          {' dsplay.tv'}
-        </a>
+        <a href="https://dsplay.tv">dsplay.tv</a>
       </strong>
-      {' | '}
+      {' | from '}
       <a href="https://ourworldindata.org/covid-vaccinations">
-        From Our World in Data
+        Our World in Data
       </a>
       {` - ${t('Last Updated')}: ${moment(date).fromNow()}`}
     </div>

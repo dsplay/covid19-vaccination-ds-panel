@@ -4,8 +4,8 @@ import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import 'chartjs-adapter-date-fns';
 
-import ObjectValidateCountry from '../../utils/ObjectValidateCountry';
-import numberFormatter from '../../utils/NumberFormatter';
+import locationSchema from '../../schemas/location';
+import { formatBigValue } from '../../utils/number';
 
 function Graph({ className, country }) {
   const { t } = useTranslation();
@@ -34,7 +34,9 @@ function Graph({ className, country }) {
         backgroundColor: 'rgba(13, 115, 13, 1)',
         elements: {
           point: {
-            radius: 0,
+            radius: 2,
+            borderWidth: 1,
+            borderColor: 'black',
           },
         },
       },
@@ -46,12 +48,19 @@ function Graph({ className, country }) {
         backgroundColor: 'rgba( 124, 252, 0, 1 )',
         elements: {
           point: {
-            radius: 0,
+            radius: 2,
+            borderWidth: 1,
           },
         },
       },
     ],
   };
+
+  const hasHistorialData = peopleVaccinated.length > 0 || peopleFullyVaccinated.length > 0;
+
+  if (!hasHistorialData) {
+    return null;
+  }
 
   return (
     <div className={className}>
@@ -117,7 +126,7 @@ function Graph({ className, country }) {
                 },
                 callback(value) {
                   if (value === 0) return 0;
-                  return numberFormatter(value);
+                  return formatBigValue(value);
                 },
               },
             },
@@ -129,7 +138,7 @@ function Graph({ className, country }) {
 }
 
 Graph.propTypes = {
-  country: PropTypes.shape(ObjectValidateCountry).isRequired,
+  country: PropTypes.shape(locationSchema).isRequired,
   className: PropTypes.string,
 };
 
