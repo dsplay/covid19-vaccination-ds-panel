@@ -1,12 +1,12 @@
 /* eslint-disable  import/prefer-default-export */
 import axios from 'axios';
 
-import { KEY_LOCATION, dataLocalStorageIsValid } from './vaccination-data';
+import { KEY_LOCATION, isLocalStorageDataValid } from './vaccination-data';
 
 export async function detectUserLocation() {
   try {
     const locationCode = localStorage.getItem(KEY_LOCATION);
-    if (dataLocalStorageIsValid()) {
+    if (isLocalStorageDataValid()) {
       return locationCode;
     }
     const response = await axios.get('https://manager.dsplay.tv/service/getMyIpInfo');

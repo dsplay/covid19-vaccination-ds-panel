@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { name } from 'country-emoji';
 import i18n from './i18n';
-import getVaccinationData from './services/vaccination-data';
+import { getVaccinationData } from './services/vaccination-data';
 import { detectUserLocation } from './services/location';
 
 import MainPage from './pages/main-page';

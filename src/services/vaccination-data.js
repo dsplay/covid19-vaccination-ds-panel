@@ -8,7 +8,6 @@ const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
-const KEY_LOCATION = 'location';
 const VERSION = '1.6';
 
 const COUNTRIES_LIMIT = 20;
@@ -18,6 +17,8 @@ const countriesMap = {
 };
 
 const forbiddenCodes = ['EU'];
+
+export const KEY_LOCATION = 'location';
 
 async function fetchVaccinationData() {
   const response = await axios.get('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv');
@@ -116,7 +117,7 @@ function setLocalStorageData(selectedLocationCode, vaccinationData) {
   localStorage.setItem(KEY_VERSION, VERSION);
 }
 
-function isLocalStorageDataValid(selectedCountryCode) {
+export function isLocalStorageDataValid(selectedCountryCode) {
   const locationCode = localStorage.getItem(KEY_LOCATION);
   if (!locationCode) return false;
 
@@ -134,7 +135,7 @@ function isLocalStorageDataValid(selectedCountryCode) {
   return true;
 }
 
-export default async function getVaccinationData(selectedCountryCode) {
+export async function getVaccinationData(selectedCountryCode) {
   // if (1 > 0) throw new Error('Boom');
 
   if (isLocalStorageDataValid(selectedCountryCode)) {
@@ -152,5 +153,3 @@ export default async function getVaccinationData(selectedCountryCode) {
 
   return getLocalStorageData();
 }
-
-export { isLocalStorageDataValid as dataLocalStorageIsValid, KEY_LOCATION };
