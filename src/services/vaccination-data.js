@@ -9,7 +9,7 @@ const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
 const KEY_LOCATION = 'location';
-const VERSION = '1.5';
+const VERSION = '1.6';
 
 const COUNTRIES_LIMIT = 20;
 
