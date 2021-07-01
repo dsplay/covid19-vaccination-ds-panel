@@ -27,12 +27,12 @@ function MainPage({ selectedCountry = {}, countries = [], pageDuration }) {
       <div className="main-page">
         <Helmet>
           <title>
-            {t('Covid-19 Vaccination')}
+            {t('COVID-19 Vaccination')}
           </title>
         </Helmet>
         <div className="flex wrapper-title">
-          <h1>{t('Covid-19 Vaccination')}</h1>
-          <img className="logo" alt={t('Covid-19 Vaccination')} src={logo} />
+          <h1>{t('COVID-19 Vaccination')}</h1>
+          <img className="logo" alt={t('COVID-19 Vaccination')} src={logo} />
         </div>
         <div className="wrapper-main-content flex elements-in-row">
           <CardList className="wrapper-card-list" country={selectedCountry} />
