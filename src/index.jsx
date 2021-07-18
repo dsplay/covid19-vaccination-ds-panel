@@ -1,6 +1,6 @@
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
-import 'proxy-polyfill/proxy.min';
+import 'es6-proxy-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
