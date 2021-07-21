@@ -66,11 +66,12 @@ function Graph({ className, country }) {
     <div className={className}>
       <Line
         width={100}
-        height={100}
+        height={500}
         data={data}
+        responsive
         options={{
           maintainAspectRatio: false,
-          responsive: true,
+          // responsive: true,
           interaction: {
             intersect: false,
           },
