@@ -74,28 +74,26 @@ function Graph({ className, country }) {
           interaction: {
             intersect: false,
           },
-          plugins: {
-            title: {
-              display: true,
-              text: t('vaccination over the time'),
-            },
-            legend: {
-              display: true,
-              position: 'chartArea',
-              labels: {
-                font: {
-                  size: (fontSize * 1.3),
-                },
+          title: {
+            display: true,
+            text: t('vaccination over the time'),
+          },
+          legend: {
+            display: true,
+            position: 'chartArea',
+            labels: {
+              font: {
+                size: (fontSize * 1.3),
               },
             },
           },
 
           scales: {
-            x: {
-              scaleLabel: {
-                display: true,
-                labelString: 'Date',
-              },
+            xAxes: [{
+              // scaleLabel: {
+              //   display: true,
+              //   labelString: 'Date',
+              // },
               type: 'time',
               time: {
                 parser: 'YYYY-MM-DD HH:mm:ss',
@@ -117,8 +115,8 @@ function Graph({ className, country }) {
                   return t(value);
                 },
               },
-            },
-            y: {
+            }],
+            yAxes: [{
               ticks: {
                 font: {
                   size: fontSize,
@@ -129,7 +127,7 @@ function Graph({ className, country }) {
                   return formatBigValue(value);
                 },
               },
-            },
+            }],
           },
         }}
       />
