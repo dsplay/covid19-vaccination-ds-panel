@@ -71,21 +71,20 @@ function Graph({ className, country }) {
         responsive
         options={{
           maintainAspectRatio: false,
-          // responsive: true,
+          responsive: true,
           interaction: {
             intersect: false,
           },
           title: {
             display: true,
             text: t('vaccination over the time'),
+            fontSize,
           },
           legend: {
             display: true,
             position: 'chartArea',
             labels: {
-              font: {
-                size: (fontSize * 1.3),
-              },
+              fontSize: fontSize * 1.3,
             },
           },
 
@@ -108,10 +107,8 @@ function Graph({ className, country }) {
                 margin: 10,
                 maxRotation: 0,
                 minRotation: 0,
-                font: {
-                  size: fontSize,
-                  weight: 800,
-                },
+                fontSize,
+                fontStyle: 'bold',
                 callback(value) {
                   return t(value);
                 },
@@ -119,10 +116,8 @@ function Graph({ className, country }) {
             }],
             yAxes: [{
               ticks: {
-                font: {
-                  size: fontSize,
-                  weight: 800,
-                },
+                fontStyle: 'bold',
+                fontSize,
                 callback(value) {
                   if (value === 0) return 0;
                   return formatBigValue(value);
