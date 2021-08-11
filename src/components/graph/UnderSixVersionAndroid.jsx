@@ -81,10 +81,6 @@ function GraphForOldVersionAndroid({ className, country }) {
 
           scales: {
             xAxes: [{
-              // scaleLabel: {
-              //   display: true,
-              //   labelString: 'Date',
-              // },
               type: 'time',
               time: {
                 parser: 'YYYY-MM-DD HH:mm:ss',

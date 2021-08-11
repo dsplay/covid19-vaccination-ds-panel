@@ -8,8 +8,7 @@ import GraphDefault from './default';
 const regex = /^0*[1-6]./;
 
 function Graph({ className, country }) {
-  if (isAndroid && regex.test(osVersion)) {
-  // if (!isAndroid || (isAndroid && regex.test(osVersion))) {
+  if (!isAndroid || (isAndroid && regex.test(osVersion))) {
     return <GraphForOldVersionAndroid className={className} country={country} />;
   }
 

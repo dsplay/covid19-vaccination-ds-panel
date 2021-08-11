@@ -7,27 +7,23 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine,
+  CartesianGrid, Tooltip, ResponsiveContainer, Legend,
 } from 'recharts';
 
 import locationSchema from '../../schemas/location';
 import { formatBigValue } from '../../utils/number';
 
-const renderColorfulLegendText = (value) => <span style={{ color: 'black', fontWeight: 500 }}>{value}</span>;
+import './styles.sass';
 
 function GraphDefault({ className, country }) {
   const { t } = useTranslation();
   const fontSize = Number(document.querySelector('html').style.fontSize.toString().replace('px', ''));
 
+  const renderColorfulLegendText = (value) => <span className="legend">{value}</span>;
+
   return (
     <div className={className}>
-      <div
-        style={{
-          textAlign: 'center',
-          fontSize,
-          fontWeight: 800,
-        }}
-      >
+      <div className="title-graph">
         {t('vaccination over the time')}
       </div>
       <ResponsiveContainer width="100%" height="95%">
@@ -45,13 +41,12 @@ function GraphDefault({ className, country }) {
           <CartesianGrid strokeDasharray="3 3" />
           <Legend
             layout="vertical"
-            wrapperStyle={{ left: '15%', textcolo: 'black' }}
+            wrapperStyle={{ left: '15%', fontSize: '1.3rem' }}
             verticalAlign="middle"
             align="center"
             iconType="rect"
             formatter={renderColorfulLegendText}
           />
-          <ReferenceLine label="dede" y="120M" />
           <XAxis
             dataKey="date"
             interval={30}
@@ -60,8 +55,7 @@ function GraphDefault({ className, country }) {
               return date.format('MMM');
             }}
             style={{
-              fontWeight: 800,
-              fontSize,
+              fontWeight: 700,
             }}
           />
           <YAxis
