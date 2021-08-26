@@ -11,7 +11,6 @@ import './style.sass';
 function Table({ countries = [], duration }) {
   const { t } = useTranslation();
 
-  console.log(countries);
   const worldInfoIndex = countries.findIndex((country) => country.code === 'World');
   const worldInfoExist = worldInfoIndex >= 0;
 

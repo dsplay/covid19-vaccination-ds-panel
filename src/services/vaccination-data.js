@@ -26,11 +26,11 @@ async function fetchVaccinationData() {
 }
 
 function sortCountries(countries) {
-  return countries.map((country) => {
-    [country.peopleFullyVaccinatedPerHundred] = country.peopleFullyVaccinatedPerHundred.split('.');
-    [country.peopleVaccinatedPerHundred] = country.peopleVaccinatedPerHundred.split('.');
-    return country;
-  }).sort(
+  return countries.map((country) => ({
+    ...country,
+    peopleFullyVaccinatedPerHundred: country.peopleFullyVaccinatedPerHundred && country.peopleFullyVaccinatedPerHundred.split('.')[0],
+    peopleVaccinatedPerHundred: country.peopleVaccinatedPerHundred && country.peopleVaccinatedPerHundred.split('.')[0],
+  })).sort(
     (countryA, countryB) => {
       if (countryA.code === 'World') return -1;
       if (countryB.code === 'World') return 1;
@@ -64,6 +64,7 @@ function filterVaccinationData(vaccinationData, selectedCountryCode) {
       !countries.has(codeCountry)
       && peopleVaccinated.trim() !== ''
       && peopleVaccinatedPerHundred.trim() !== ''
+      && peopleFullyVaccinatedPerHundred.trim() !== ''
       && Number(peopleVaccinatedPerHundred) !== 0
       && codeCountry
       && !forbiddenCodes.includes(codeCountry)
