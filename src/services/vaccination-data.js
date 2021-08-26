@@ -8,7 +8,7 @@ const KEY_DATA = 'data';
 const KEY_SELECTED = 'selected';
 const KEY_UPDATED = 'updated';
 const KEY_VERSION = 'version';
-const VERSION = '1.6';
+const VERSION = '1.8.2';
 
 const COUNTRIES_LIMIT = 20;
 
@@ -26,8 +26,21 @@ async function fetchVaccinationData() {
 }
 
 function sortCountries(countries) {
-  return countries.sort(
-    (countryA, countryB) => countryB.totalVaccinations - countryA.totalVaccinations,
+  return countries.map((country) => {
+    [country.peopleFullyVaccinatedPerHundred] = country.peopleFullyVaccinatedPerHundred.split('.');
+    [country.peopleVaccinatedPerHundred] = country.peopleVaccinatedPerHundred.split('.');
+    return country;
+  }).sort(
+    (countryA, countryB) => {
+      if (countryA.code === 'World') return -1;
+      if (countryB.code === 'World') return 1;
+      if (countryB.peopleFullyVaccinatedPerHundred !== countryA.peopleFullyVaccinatedPerHundred) {
+        return countryB.peopleFullyVaccinatedPerHundred - countryA.peopleFullyVaccinatedPerHundred;
+      } if (countryB.peopleVaccinatedPerHundred !== countryA.peopleVaccinatedPerHundred) {
+        return countryB.peopleVaccinatedPerHundred - countryA.peopleVaccinatedPerHundred;
+      }
+      return countryB.totalVaccinations - countryA.totalVaccinations;
+    },
   ).slice(0, COUNTRIES_LIMIT);
 }
 
@@ -54,6 +67,8 @@ function filterVaccinationData(vaccinationData, selectedCountryCode) {
       && Number(peopleVaccinatedPerHundred) !== 0
       && codeCountry
       && !forbiddenCodes.includes(codeCountry)
+      && parseFloat(peopleVaccinatedPerHundred) < 100
+      && parseFloat(peopleFullyVaccinatedPerHundred) < 100
     ) {
       countries.set(codeCountry, {
         location,
@@ -136,8 +151,6 @@ export function isLocalStorageDataValid(selectedCountryCode) {
 }
 
 export async function getVaccinationData(selectedCountryCode) {
-  // if (1 > 0) throw new Error('Boom');
-
   if (isLocalStorageDataValid(selectedCountryCode)) {
     return getLocalStorageData();
   }

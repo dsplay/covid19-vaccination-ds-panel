@@ -11,6 +11,7 @@ import './style.sass';
 function Table({ countries = [], duration }) {
   const { t } = useTranslation();
 
+  console.log(countries);
   const worldInfoIndex = countries.findIndex((country) => country.code === 'World');
   const worldInfoExist = worldInfoIndex >= 0;
 
@@ -52,9 +53,9 @@ function Table({ countries = [], duration }) {
           <tr>
             <th>{t('Location')}</th>
             <th className="number">{t('Population')}</th>
-            <th className="number">{t('Doses Given')}</th>
-            <th className="number">{t('% at least 1 dose')}</th>
             <th className="number" h>{t('% fully vaccinated')}</th>
+            <th className="number">{t('% at least 1 dose')}</th>
+            <th className="number">{t('Doses Given')}</th>
           </tr>
         </thead>
         <tbody>

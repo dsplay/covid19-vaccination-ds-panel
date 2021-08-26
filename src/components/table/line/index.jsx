@@ -29,8 +29,14 @@ function Line({
       <td className="value">
         {formatBigValue(population) || '-'}
       </td>
-      <td className="value">
-        {formatBigValue(totalVaccinations) || '-'}
+      <td className="value pct">
+        <span>{`${Number(peopleFullyVaccinatedPerHundred).toFixed(0)}%`}</span>
+        <span
+          className="status"
+          style={{
+            backgroundColor: getColorFromPct(Number(peopleFullyVaccinatedPerHundred / 100), true),
+          }}
+        />
       </td>
       <td className="value pct">
         {`${Number(peopleVaccinatedPerHundred).toFixed(0)}%`}
@@ -41,14 +47,8 @@ function Line({
           }}
         />
       </td>
-      <td className="value pct">
-        <span>{`${Number(peopleFullyVaccinatedPerHundred).toFixed(0)}%`}</span>
-        <span
-          className="status"
-          style={{
-            backgroundColor: getColorFromPct(Number(peopleFullyVaccinatedPerHundred / 100), true),
-          }}
-        />
+      <td className="value">
+        {formatBigValue(totalVaccinations) || '-'}
       </td>
     </tr>
   );
